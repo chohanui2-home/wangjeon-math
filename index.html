@@ -56,7 +56,11 @@ button{font-family:inherit;cursor:pointer}
 .iconbtn.off{color:#9aa9c6}
 .spacer{width:38px;height:38px;flex:0 0 auto}
 
-.playview{display:flex;flex-direction:column}
+.playview{display:flex;flex-direction:column;width:100%}
+@media (min-height:760px){
+  main{flex:1;display:flex;flex-direction:column;justify-content:center}
+  .playview,.resultview{width:100%}
+}
 .mascots{
   display:flex;justify-content:center;align-items:flex-end;gap:2px;
   margin:0 0 -24px;position:relative;z-index:0;pointer-events:none;
@@ -326,7 +330,7 @@ button{font-family:inherit;cursor:pointer}
       </div>
 
       <div class="statusbar">
-        <div class="stat"><span class="statlabel">단계</span><b id="lvText">Lv 1</b></div>
+        <div class="stat"><span class="statlabel" id="lvName">워밍업</span><b id="lvText">Lv 1</b></div>
         <div class="stat"><span class="statlabel">시간</span><b id="timeText">01:30</b></div>
         <div class="stat"><span class="statlabel">점수</span><b id="scoreText">0점</b></div>
       </div>
@@ -560,7 +564,10 @@ button{font-family:inherit;cursor:pointer}
   var bags = {};
 
   /* ---------- render ---------- */
-  function renderLevel() { $('lvText').textContent = 'Lv ' + S.level; }
+  function renderLevel() {
+    $('lvText').textContent = 'Lv ' + S.level;
+    $('lvName').textContent = DATA.levels[S.level - 1].name;
+  }
   function renderTime() { $('timeText').textContent = fmtTime(S.timeLeft); }
   function renderScore() { $('scoreText').textContent = S.score + '점'; }
   function renderDots() {
