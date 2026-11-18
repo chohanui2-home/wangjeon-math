@@ -1,0 +1,1069 @@
+<!doctype html>
+<html lang="ko">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>왕전초 연산왕</title>
+<meta name="theme-color" content="#dcecff">
+<meta name="mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-status-bar-style" content="default">
+<meta name="apple-mobile-web-app-title" content="연산왕">
+<meta name="description" content="연산 기호를 넣어 식을 완성하는 초등 연산 퍼즐 게임">
+<link rel="icon" href="data:image/svg+xml,%3Csvg%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%20viewBox%3D%220%200%20512%20512%22%3E%3Cdefs%3E%3ClinearGradient%20id%3D%22g%22%20x1%3D%220%22%20y1%3D%220%22%20x2%3D%220%22%20y2%3D%221%22%3E%3Cstop%20offset%3D%220%22%20stop-color%3D%22%238ed6ff%22%2F%3E%3Cstop%20offset%3D%221%22%20stop-color%3D%22%233b62ff%22%2F%3E%3C%2FlinearGradient%3E%3C%2Fdefs%3E%3Crect%20width%3D%22512%22%20height%3D%22512%22%20rx%3D%22116%22%20fill%3D%22url%28%23g%29%22%2F%3E%3Ccircle%20cx%3D%22256%22%20cy%3D%22272%22%20r%3D%22150%22%20fill%3D%22%23ffffff%22%20opacity%3D%220.16%22%2F%3E%3Ctext%20x%3D%22256%22%20y%3D%22368%22%20font-family%3D%22system-ui%2C-apple-system%2C%27Apple%20SD%20Gothic%20Neo%27%2Csans-serif%22%20font-size%3D%22290%22%20font-weight%3D%22800%22%20fill%3D%22%23ffffff%22%20text-anchor%3D%22middle%22%3E%3F%3C%2Ftext%3E%3Ccircle%20cx%3D%22150%22%20cy%3D%22150%22%20r%3D%2215%22%20fill%3D%22%23ffffff%22%20opacity%3D%220.9%22%2F%3E%3Ccircle%20cx%3D%22368%22%20cy%3D%22132%22%20r%3D%2210%22%20fill%3D%22%23ffffff%22%20opacity%3D%220.75%22%2F%3E%3Ccircle%20cx%3D%22384%22%20cy%3D%22392%22%20r%3D%2213%22%20fill%3D%22%23ffffff%22%20opacity%3D%220.8%22%2F%3E%3C%2Fsvg%3E">
+<link rel="apple-touch-icon" href="data:image/svg+xml,%3Csvg%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%20viewBox%3D%220%200%20512%20512%22%3E%3Cdefs%3E%3ClinearGradient%20id%3D%22g%22%20x1%3D%220%22%20y1%3D%220%22%20x2%3D%220%22%20y2%3D%221%22%3E%3Cstop%20offset%3D%220%22%20stop-color%3D%22%238ed6ff%22%2F%3E%3Cstop%20offset%3D%221%22%20stop-color%3D%22%233b62ff%22%2F%3E%3C%2FlinearGradient%3E%3C%2Fdefs%3E%3Crect%20width%3D%22512%22%20height%3D%22512%22%20rx%3D%22116%22%20fill%3D%22url%28%23g%29%22%2F%3E%3Ccircle%20cx%3D%22256%22%20cy%3D%22272%22%20r%3D%22150%22%20fill%3D%22%23ffffff%22%20opacity%3D%220.16%22%2F%3E%3Ctext%20x%3D%22256%22%20y%3D%22368%22%20font-family%3D%22system-ui%2C-apple-system%2C%27Apple%20SD%20Gothic%20Neo%27%2Csans-serif%22%20font-size%3D%22290%22%20font-weight%3D%22800%22%20fill%3D%22%23ffffff%22%20text-anchor%3D%22middle%22%3E%3F%3C%2Ftext%3E%3Ccircle%20cx%3D%22150%22%20cy%3D%22150%22%20r%3D%2215%22%20fill%3D%22%23ffffff%22%20opacity%3D%220.9%22%2F%3E%3Ccircle%20cx%3D%22368%22%20cy%3D%22132%22%20r%3D%2210%22%20fill%3D%22%23ffffff%22%20opacity%3D%220.75%22%2F%3E%3Ccircle%20cx%3D%22384%22%20cy%3D%22392%22%20r%3D%2213%22%20fill%3D%22%23ffffff%22%20opacity%3D%220.8%22%2F%3E%3C%2Fsvg%3E">
+<link id="manifestLink" rel="manifest">
+<style>
+:root{
+  --ink:#22315a; --ink-soft:#6b7ea6; --blue:#2f5cf0; --card-1:#3f74ff; --card-2:#2848cf;
+  --line:#dbe6ff;
+}
+*{box-sizing:border-box;-webkit-tap-highlight-color:transparent}
+html,body{margin:0;padding:0;min-height:100%}
+body{
+  font-family:-apple-system,BlinkMacSystemFont,"Apple SD Gothic Neo","Malgun Gothic","Noto Sans KR",system-ui,"Segoe UI",sans-serif;
+  color:var(--ink);
+  background:
+    radial-gradient(900px 460px at 50% -8%, #ffffff 0%, rgba(255,255,255,0) 62%),
+    linear-gradient(180deg,#e9f3ff 0%, #f5faff 44%, #edf5ff 100%);
+  -webkit-text-size-adjust:100%;
+  overflow-x:hidden;
+  touch-action:manipulation;
+}
+body::before{
+  content:"";position:fixed;left:-12%;top:16%;width:64vw;height:64vw;max-width:420px;max-height:420px;
+  background:radial-gradient(closest-side,rgba(255,255,255,.85),rgba(255,255,255,0));
+  pointer-events:none;z-index:0;
+}
+button{font-family:inherit;cursor:pointer}
+.app{
+  position:relative;z-index:1;max-width:480px;margin:0 auto;
+  padding:calc(8px + env(safe-area-inset-top)) 16px calc(104px + env(safe-area-inset-bottom));
+  min-height:100vh;min-height:100dvh;display:flex;flex-direction:column;
+}
+.topbar{display:flex;align-items:center;justify-content:space-between;gap:6px;padding:2px 0 10px}
+.topbar h1{margin:0;font-size:19px;font-weight:900;letter-spacing:-.03em}
+.topright{display:flex;gap:6px;align-items:center}
+.iconbtn{
+  width:38px;height:38px;flex:0 0 auto;border-radius:13px;border:none;background:#fff;
+  box-shadow:0 4px 12px rgba(58,96,180,.14);color:#3a6bd6;display:grid;place-items:center;padding:0;
+  transition:transform .1s;
+}
+.iconbtn:active{transform:scale(.93)}
+.iconbtn svg{width:19px;height:19px;fill:none;stroke:currentColor;stroke-width:2;stroke-linecap:round;stroke-linejoin:round}
+.iconbtn .solid{fill:currentColor;stroke:none}
+.iconbtn.off{color:#9aa9c6}
+.spacer{width:38px;height:38px;flex:0 0 auto}
+
+.playview{display:flex;flex-direction:column}
+.mascots{
+  display:flex;justify-content:center;align-items:flex-end;gap:2px;
+  margin:0 0 -24px;position:relative;z-index:0;pointer-events:none;
+}
+.mascot{width:106px;height:98px;filter:drop-shadow(0 8px 12px rgba(60,90,160,.18))}
+.mascot.bear{width:98px;height:94px;margin-bottom:4px}
+.bob{animation:bob 3.4s ease-in-out infinite}
+.bob2{animation:bob 3.9s ease-in-out .35s infinite}
+@keyframes bob{0%,100%{transform:translateY(0)}50%{transform:translateY(-5px)}}
+.mascots[data-mood="happy"] .mascot{animation:hop .55s ease}
+.mascots[data-mood="sad"] .mascot{animation:tremble .5s ease}
+@keyframes hop{0%,100%{transform:translateY(0)}35%{transform:translateY(-13px) rotate(-3deg)}70%{transform:translateY(-4px)}}
+@keyframes tremble{0%,100%{transform:translateX(0)}20%{transform:translateX(-4px)}60%{transform:translateX(4px)}}
+
+.face{display:none}
+.mascots[data-mood="idle"] .face-idle,
+.mascots[data-mood="happy"] .face-happy,
+.mascots[data-mood="sad"] .face-sad{display:block}
+
+.statusbar{
+  position:relative;z-index:1;background:#fff;border-radius:999px;
+  box-shadow:0 10px 24px rgba(56,92,170,.16);display:grid;grid-template-columns:1fr 1fr 1fr;
+  padding:13px 6px;margin-bottom:11px;
+}
+.stat{display:flex;flex-direction:column;align-items:center;gap:2px;position:relative}
+.stat+.stat::before{content:"";position:absolute;left:0;top:4px;bottom:4px;width:1px;background:#eef3fd}
+.statlabel{font-size:10.5px;color:#93a3c2;font-weight:800;letter-spacing:.02em}
+.stat b{font-size:17px;font-weight:900;font-variant-numeric:tabular-nums;letter-spacing:-.02em}
+
+.dots{display:flex;gap:7px;justify-content:center;margin:0 0 11px;height:9px}
+.dot{width:9px;height:9px;border-radius:50%;background:#cfdcf4;transition:all .2s}
+.dot.now{background:var(--blue);width:24px;border-radius:999px}
+.dot.ok{background:#2bc48a}
+.dot.no{background:#ffb4c0}
+
+.card{
+  position:relative;background:linear-gradient(165deg,var(--card-1) 0%,#2a55e6 58%,var(--card-2) 100%);
+  border-radius:30px;padding:22px 16px 18px;color:#fff;overflow:hidden;
+  box-shadow:0 20px 36px -12px rgba(38,70,200,.55), inset 0 2px 0 rgba(255,255,255,.22);
+  transition:transform .12s;
+}
+.card::after{
+  content:"";position:absolute;left:-30%;right:-30%;bottom:-58%;height:70%;
+  background:radial-gradient(closest-side,rgba(255,255,255,.18),rgba(255,255,255,0));
+  pointer-events:none;
+}
+.card.shake{animation:shake .42s cubic-bezier(.36,.07,.19,.97)}
+.card.pop{animation:pop .4s ease}
+@keyframes shake{10%,90%{transform:translateX(-3px)}20%,80%{transform:translateX(5px)}30%,50%,70%{transform:translateX(-8px)}40%,60%{transform:translateX(8px)}}
+@keyframes pop{0%{transform:scale(1)}45%{transform:scale(1.045)}100%{transform:scale(1)}}
+
+.refresh{
+  position:absolute;top:11px;right:11px;width:38px;height:38px;border-radius:50%;border:none;
+  background:rgba(255,255,255,.16);color:#fff;display:grid;place-items:center;z-index:3;
+  transition:transform .25s, background .2s;
+}
+.refresh:active{transform:rotate(-60deg);background:rgba(255,255,255,.3)}
+.refresh svg{width:20px;height:20px;fill:none;stroke:currentColor;stroke-width:2.2;stroke-linecap:round;stroke-linejoin:round}
+
+.equation{position:relative;z-index:2;padding:22px 4px 2px;min-height:108px;display:flex;flex-direction:column;justify-content:center}
+.expr{display:flex;flex-wrap:wrap;align-items:center;justify-content:center;gap:6px 6px;font-weight:900;font-size:clamp(26px,8.2vw,36px);line-height:1;letter-spacing:-.02em}
+.expr.dense{font-size:clamp(21px,6.9vw,31px);gap:5px 4px}
+.eqnum{text-shadow:0 2px 0 rgba(10,30,110,.16)}
+.eqtotal{display:flex;align-items:center;justify-content:center;gap:8px;margin-top:10px;font-weight:900;font-size:clamp(22px,6.8vw,30px);opacity:.96}
+.slot{
+  width:clamp(38px,11vw,48px);height:clamp(44px,12.4vw,54px);border-radius:15px;
+  border:2.5px solid rgba(255,255,255,.85);background:rgba(255,255,255,.13);color:#fff;
+  font-size:clamp(20px,6vw,26px);font-weight:900;display:grid;place-items:center;padding:0;
+  transition:transform .12s, background .15s, color .15s;
+}
+.expr.dense .slot{width:clamp(34px,9.6vw,42px);height:clamp(40px,11vw,50px);border-radius:13px;font-size:clamp(18px,5.4vw,23px)}
+.slot.filled{background:#fff;color:#2a55e6;border-color:#fff;box-shadow:0 3px 0 rgba(16,40,140,.25)}
+.slot.active{background:rgba(255,255,255,.34);box-shadow:0 0 0 4px rgba(255,255,255,.24)}
+.slot.active.filled{background:#fff;color:#2a55e6}
+.slot.pulse{animation:sPulse 1.5s ease-in-out infinite}
+.slot.pulse.filled{animation:none}
+@keyframes sPulse{0%,100%{box-shadow:0 0 0 3px rgba(255,255,255,.22)}50%{box-shadow:0 0 0 8px rgba(255,255,255,.1)}}
+.slot:active{transform:scale(.94)}
+
+.feedback{position:relative;z-index:2;min-height:42px;display:flex;align-items:center;justify-content:center;text-align:center;font-size:13.5px;font-weight:800;line-height:1.4;padding:6px 6px 2px;opacity:0;transition:opacity .18s}
+.feedback.show{opacity:1}
+.feedback.ok{color:#dffff0}
+.feedback.bad{color:#ffe6ea}
+
+.ops{position:relative;z-index:2;display:grid;grid-template-columns:repeat(4,1fr);gap:7px;margin-top:4px}
+.opbtn{
+  height:56px;border-radius:18px;border:none;background:#fff;color:#2a55e6;
+  font-size:26px;font-weight:900;line-height:1;padding-bottom:2px;
+  box-shadow:0 6px 0 rgba(18,44,140,.3);transition:transform .07s, box-shadow .07s;
+}
+.opbtn:active{transform:translateY(4px);box-shadow:0 2px 0 rgba(18,44,140,.3)}
+.opbtn small{display:block;font-size:9px;font-weight:800;color:#94a6cc;margin-top:1px;letter-spacing:.02em}
+
+.submit{
+  margin:14px 0 0;width:100%;height:60px;border-radius:20px;border:none;color:#fff;
+  font-size:19px;font-weight:900;letter-spacing:.01em;
+  background:linear-gradient(160deg,#8ed6ff 0%,#5a8bff 46%,#6a5cff 100%);
+  box-shadow:0 8px 0 #2b46c7, 0 18px 28px -10px rgba(48,78,200,.6);
+  transition:transform .08s, box-shadow .08s;
+}
+.submit:active{transform:translateY(5px);box-shadow:0 3px 0 #2b46c7}
+.submit.retry{background:linear-gradient(160deg,#ffd98a,#ffb84d 60%,#ff9f2e);box-shadow:0 8px 0 #c9761c,0 18px 28px -10px rgba(200,130,40,.5);color:#4a2a00}
+
+.skip{display:block;margin:11px auto 0;background:none;border:none;color:#7b8ead;font-size:13.5px;font-weight:800;text-decoration:underline;text-underline-offset:3px;padding:6px 10px}
+
+.resultview{padding-top:2px}
+.resultcard{background:#fff;border-radius:30px;padding:20px 18px 20px;box-shadow:0 20px 44px -16px rgba(56,92,170,.4);text-align:center}
+.resultmascots{display:flex;justify-content:center;margin-top:-6px;margin-bottom:2px}
+.resultmascots .mascot{width:96px;height:90px}
+.resultcard h2{margin:2px 0 0;font-size:22px;font-weight:900;letter-spacing:-.02em}
+.resultcard .sub{margin:4px 0 0;font-size:12.5px;color:#93a3c2;font-weight:700}
+.stars{font-size:31px;letter-spacing:5px;margin:8px 0 6px;color:#ffcf47;line-height:1}
+.stars i{font-style:normal;display:inline-block;text-shadow:0 2px 0 rgba(230,170,20,.25)}
+.stars i.off{color:#e4eaf6;text-shadow:none}
+.stars i.on{animation:starPop .5s ease backwards}
+.stars i.on:nth-child(2){animation-delay:.1s}
+.stars i.on:nth-child(3){animation-delay:.2s}
+@keyframes starPop{0%{transform:scale(.3) rotate(-25deg);opacity:0}70%{transform:scale(1.18)}100%{transform:scale(1) rotate(0);opacity:1}}
+
+.resultStats{display:grid;grid-template-columns:repeat(3,1fr);gap:8px;margin:12px 0 8px}
+.resultStats div{background:#f2f7ff;border-radius:16px;padding:10px 4px}
+.resultStats span{display:block;font-size:11px;color:#8ba0c2;font-weight:800;margin-bottom:3px}
+.resultStats b{font-size:17px;font-weight:900;font-variant-numeric:tabular-nums}
+.bestline{margin:6px 0 0;font-size:12.5px;color:#7d90b3;font-weight:800;min-height:18px}
+.bestline .new{display:inline-block;margin-left:6px;background:#fff0d6;color:#c9761c;border-radius:999px;padding:3px 9px;font-size:11px;font-weight:900}
+.resultButtons{display:grid;gap:9px;margin-top:14px}
+.btn{border:none;border-radius:18px;height:52px;font-size:16px;font-weight:900;transition:transform .08s}
+.btn:active{transform:scale(.97)}
+.btn.ghost{background:#eef4ff;color:#3a63c9}
+.btn.solid{background:linear-gradient(160deg,#5a8bff,#3b62ff);color:#fff;box-shadow:0 6px 0 #2b46c7}
+.btn.solid:active{box-shadow:0 3px 0 #2b46c7;transform:translateY(3px)}
+.btn.share{background:#fff;color:#3a63c9;border:2px solid #dbe6ff}
+.btnrow{display:grid;grid-template-columns:1fr 1fr;gap:9px}
+.btnrow.solo{grid-template-columns:1fr}
+
+.tabbar{
+  position:fixed;left:0;right:0;bottom:0;z-index:20;
+  background:rgba(255,255,255,.93);backdrop-filter:blur(14px);-webkit-backdrop-filter:blur(14px);
+  border-top:1px solid rgba(198,215,242,.8);
+  padding:7px 8px calc(7px + env(safe-area-inset-bottom));
+  box-shadow:0 -8px 24px rgba(60,90,150,.08);
+}
+.tabs{display:flex;gap:3px;width:100%;max-width:480px;margin:0 auto}
+.tab{flex:1 1 0;min-width:0;border:none;background:none;border-radius:15px;padding:5px 0 6px;display:flex;flex-direction:column;align-items:center;gap:1px;color:#8a9ab8;font-weight:800;position:relative}
+.tab .tn{font-size:16px;font-weight:900;line-height:1.1}
+.tab .tl{font-size:9.5px;font-weight:800;letter-spacing:-.01em;white-space:nowrap;overflow:hidden;text-overflow:ellipsis;max-width:100%}
+.tab .mark{position:absolute;top:1px;right:calc(50% - 23px);font-size:10px;line-height:1;color:#ffb72b}
+.tab.active{background:linear-gradient(180deg,#eaf2ff,#dae8ff);color:#2a55e6}
+.tab.active .tl{color:#4f6ea8}
+
+.fx{position:fixed;inset:0;pointer-events:none;overflow:hidden;z-index:30}
+.spark{position:absolute;width:9px;height:9px;animation:fall 1.3s ease-out forwards}
+@keyframes fall{0%{opacity:1;transform:translate(0,0) rotate(0)}100%{opacity:0;transform:translate(var(--dx,0),70vh) rotate(520deg)}}
+
+.toast{
+  position:fixed;left:50%;bottom:calc(100px + env(safe-area-inset-bottom));transform:translateX(-50%);
+  background:rgba(34,49,90,.94);color:#fff;padding:11px 18px;border-radius:999px;
+  font-size:13px;font-weight:800;z-index:50;max-width:88vw;text-align:center;
+  box-shadow:0 10px 24px rgba(20,40,90,.28);animation:toastIn .18s ease;
+}
+@keyframes toastIn{from{opacity:0;transform:translate(-50%,8px)}to{opacity:1;transform:translate(-50%,0)}}
+
+.pausemask{position:fixed;inset:0;z-index:40;background:rgba(28,46,90,.42);backdrop-filter:blur(4px);-webkit-backdrop-filter:blur(4px);display:grid;place-items:center;padding:26px}
+.pausecard{background:#fff;border-radius:26px;padding:24px 28px;text-align:center;box-shadow:0 24px 50px rgba(20,40,90,.3);width:100%;max-width:300px}
+.pausecard p{margin:0 0 4px;font-size:19px;font-weight:900}
+.pausecard span{display:block;font-size:12.5px;color:#94a4c2;font-weight:700;margin-bottom:16px}
+.pausecard .btn{width:100%}
+
+@media (max-width:360px){
+  .app{padding-left:13px;padding-right:13px}
+  .tab .tl{font-size:9px}
+  .statusbar{padding:11px 4px}
+  .stat b{font-size:16px}
+}
+@media (min-height:900px){
+  .equation{min-height:120px}
+}
+</style>
+</head>
+<body>
+<div class="app">
+  <header class="topbar">
+    <div class="spacer"></div>
+    <h1>왕전초 연산왕</h1>
+    <div class="topright">
+      <button class="iconbtn" id="sndBtn" type="button" aria-label="효과음 켜기/끄기">
+        <svg id="sndOnIcon" viewBox="0 0 24 24" aria-hidden="true"><path d="M4 9.5h3.2L12 5.6v12.8L7.2 14.5H4z"/><path d="M15.6 8.6a4.6 4.6 0 0 1 0 6.8"/><path d="M18.2 6a8 8 0 0 1 0 12"/></svg>
+        <svg id="sndOffIcon" viewBox="0 0 24 24" aria-hidden="true" style="display:none"><path d="M4 9.5h3.2L12 5.6v12.8L7.2 14.5H4z"/><path d="M16 9.5l5 5M21 9.5l-5 5"/></svg>
+      </button>
+      <button class="iconbtn" id="pauseBtn" type="button" aria-label="일시정지">
+        <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M9 5.5v13M15 5.5v13"/></svg>
+      </button>
+    </div>
+  </header>
+
+  <main>
+    <section class="playview" id="playView">
+      <div class="mascots" id="mascots" data-mood="idle" aria-hidden="true">
+        <svg class="mascot purple bob" viewBox="0 0 128 118">
+          <defs>
+            <linearGradient id="pg" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#e6d8fd"/><stop offset="1" stop-color="#b79ce9"/></linearGradient>
+          </defs>
+          <ellipse cx="64" cy="111" rx="38" ry="5.5" fill="#3c5aa8" opacity=".12"/>
+          <ellipse cx="33" cy="27" rx="10" ry="8.5" fill="#cbb6f3"/>
+          <ellipse cx="95" cy="27" rx="10" ry="8.5" fill="#cbb6f3"/>
+          <ellipse cx="64" cy="66" rx="46" ry="45" fill="url(#pg)"/>
+          <ellipse cx="19" cy="74" rx="9.5" ry="13" fill="#cbb6f3" transform="rotate(-18 19 74)"/>
+          <ellipse cx="109" cy="74" rx="9.5" ry="13" fill="#cbb6f3" transform="rotate(18 109 74)"/>
+          <g class="face face-idle">
+            <ellipse cx="48" cy="60" rx="4.6" ry="5.4" fill="#3b3357"/>
+            <ellipse cx="80" cy="60" rx="4.6" ry="5.4" fill="#3b3357"/>
+            <ellipse cx="47" cy="72" rx="7" ry="4" fill="#ffb8cd" opacity=".75"/>
+            <ellipse cx="81" cy="72" rx="7" ry="4" fill="#ffb8cd" opacity=".75"/>
+            <path d="M58 73c3 4 8 4 11 0" stroke="#3b3357" stroke-width="2.8" fill="none" stroke-linecap="round"/>
+          </g>
+          <g class="face face-happy">
+            <path d="M42 61c2.6-4.4 7.4-4.4 10 0" stroke="#3b3357" stroke-width="3" fill="none" stroke-linecap="round"/>
+            <path d="M76 61c2.6-4.4 7.4-4.4 10 0" stroke="#3b3357" stroke-width="3" fill="none" stroke-linecap="round"/>
+            <ellipse cx="46" cy="72" rx="7.5" ry="4.4" fill="#ffb8cd" opacity=".9"/>
+            <ellipse cx="82" cy="72" rx="7.5" ry="4.4" fill="#ffb8cd" opacity=".9"/>
+            <path d="M55 70c2 7 13 7 17 0z" fill="#3b3357"/>
+          </g>
+          <g class="face face-sad">
+            <path d="M42 52l10 3" stroke="#3b3357" stroke-width="2.4" fill="none" stroke-linecap="round"/>
+            <path d="M86 52l-10 3" stroke="#3b3357" stroke-width="2.4" fill="none" stroke-linecap="round"/>
+            <ellipse cx="48" cy="63" rx="4" ry="4.4" fill="#3b3357"/>
+            <ellipse cx="80" cy="63" rx="4" ry="4.4" fill="#3b3357"/>
+            <path d="M58 78c3-4 8-4 11 0" stroke="#3b3357" stroke-width="2.8" fill="none" stroke-linecap="round"/>
+          </g>
+        </svg>
+        <svg class="mascot bear bob2" viewBox="0 0 128 118">
+          <defs>
+            <linearGradient id="bg1" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#ffffff"/><stop offset="1" stop-color="#e6eeff"/></linearGradient>
+          </defs>
+          <ellipse cx="64" cy="111" rx="34" ry="5.5" fill="#3c5aa8" opacity=".12"/>
+          <circle cx="30" cy="30" r="14" fill="#f6f9ff" stroke="#dde8ff" stroke-width="2"/>
+          <circle cx="98" cy="30" r="14" fill="#f6f9ff" stroke="#dde8ff" stroke-width="2"/>
+          <circle cx="30" cy="30" r="7" fill="#ffd8e3"/>
+          <circle cx="98" cy="30" r="7" fill="#ffd8e3"/>
+          <ellipse cx="64" cy="68" rx="45" ry="43" fill="url(#bg1)" stroke="#e3ecff" stroke-width="2"/>
+          <ellipse cx="64" cy="82" rx="21" ry="15" fill="#fdfdff"/>
+          <g class="face face-idle">
+            <ellipse cx="47" cy="60" rx="4.4" ry="5.2" fill="#3b3357"/>
+            <ellipse cx="81" cy="60" rx="4.4" ry="5.2" fill="#3b3357"/>
+            <ellipse cx="36" cy="70" rx="7" ry="4.2" fill="#ffc4d5" opacity=".8"/>
+            <ellipse cx="92" cy="70" rx="7" ry="4.2" fill="#ffc4d5" opacity=".8"/>
+            <ellipse cx="64" cy="76" rx="5.6" ry="4.2" fill="#7d88ad"/>
+            <path d="M64 80v4M64 84c-2 3-5 3-7 1M64 84c2 3 5 3 7 1" stroke="#7d88ad" stroke-width="2.2" fill="none" stroke-linecap="round"/>
+          </g>
+          <g class="face face-happy">
+            <path d="M42 61c2.4-4.2 6.8-4.2 9.2 0" stroke="#3b3357" stroke-width="2.9" fill="none" stroke-linecap="round"/>
+            <path d="M76.8 61c2.4-4.2 6.8-4.2 9.2 0" stroke="#3b3357" stroke-width="2.9" fill="none" stroke-linecap="round"/>
+            <ellipse cx="35" cy="70" rx="7" ry="4.4" fill="#ffc4d5" opacity=".95"/>
+            <ellipse cx="93" cy="70" rx="7" ry="4.4" fill="#ffc4d5" opacity=".95"/>
+            <ellipse cx="64" cy="77" rx="5.6" ry="4" fill="#7d88ad"/>
+            <path d="M64 81v3M64 84c-3 4-7 3-8 0M64 84c3 4 7 3 8 0" stroke="#7d88ad" stroke-width="2.2" fill="none" stroke-linecap="round"/>
+          </g>
+          <g class="face face-sad">
+            <path d="M42 53l9 3" stroke="#3b3357" stroke-width="2.3" fill="none" stroke-linecap="round"/>
+            <path d="M86 53l-9 3" stroke="#3b3357" stroke-width="2.3" fill="none" stroke-linecap="round"/>
+            <ellipse cx="47" cy="63" rx="3.9" ry="4.2" fill="#3b3357"/>
+            <ellipse cx="81" cy="63" rx="3.9" ry="4.2" fill="#3b3357"/>
+            <ellipse cx="64" cy="77" rx="5.2" ry="3.8" fill="#7d88ad"/>
+            <path d="M60 88c2.6-3 5.4-3 8 0" stroke="#7d88ad" stroke-width="2.2" fill="none" stroke-linecap="round"/>
+          </g>
+        </svg>
+      </div>
+
+      <div class="statusbar">
+        <div class="stat"><span class="statlabel">단계</span><b id="lvText">Lv 1</b></div>
+        <div class="stat"><span class="statlabel">시간</span><b id="timeText">01:30</b></div>
+        <div class="stat"><span class="statlabel">점수</span><b id="scoreText">0점</b></div>
+      </div>
+      <div class="dots" id="dots"></div>
+
+      <div class="card" id="card">
+        <button class="refresh" id="refreshBtn" type="button" aria-label="문제 새로고침">
+          <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M20 12a8 8 0 1 1-2.7-6"/><path d="M20 4.5V10h-5.5"/></svg>
+        </button>
+        <div class="equation" id="equation"></div>
+        <div class="feedback" id="feedback" aria-live="polite"></div>
+        <div class="ops" id="ops">
+          <button class="opbtn" type="button" data-op="+">+<small>더하기</small></button>
+          <button class="opbtn" type="button" data-op="-">−<small>빼기</small></button>
+          <button class="opbtn" type="button" data-op="×">×<small>곱하기</small></button>
+          <button class="opbtn" type="button" data-op="÷">÷<small>나누기</small></button>
+        </div>
+      </div>
+      <button class="submit" id="submitBtn" type="button">제출하기</button>
+      <button class="skip" id="skipBtn" type="button" hidden>이 문제는 넘어갈게요 →</button>
+    </section>
+
+    <section class="resultview" id="resultView" hidden>
+      <div class="resultcard">
+        <div class="resultmascots" aria-hidden="true">
+          <svg class="mascot purple" viewBox="0 0 128 118">
+            <ellipse cx="64" cy="111" rx="38" ry="5.5" fill="#3c5aa8" opacity=".12"/>
+            <ellipse cx="33" cy="27" rx="10" ry="8.5" fill="#cbb6f3"/>
+            <ellipse cx="95" cy="27" rx="10" ry="8.5" fill="#cbb6f3"/>
+            <ellipse cx="64" cy="66" rx="46" ry="45" fill="url(#pg)"/>
+            <ellipse cx="19" cy="74" rx="9.5" ry="13" fill="#cbb6f3" transform="rotate(-18 19 74)"/>
+            <ellipse cx="109" cy="74" rx="9.5" ry="13" fill="#cbb6f3" transform="rotate(18 109 74)"/>
+            <path d="M42 61c2.6-4.4 7.4-4.4 10 0" stroke="#3b3357" stroke-width="3" fill="none" stroke-linecap="round"/>
+            <path d="M76 61c2.6-4.4 7.4-4.4 10 0" stroke="#3b3357" stroke-width="3" fill="none" stroke-linecap="round"/>
+            <ellipse cx="46" cy="72" rx="7.5" ry="4.4" fill="#ffb8cd" opacity=".9"/>
+            <ellipse cx="82" cy="72" rx="7.5" ry="4.4" fill="#ffb8cd" opacity=".9"/>
+            <path d="M55 70c2 7 13 7 17 0z" fill="#3b3357"/>
+          </svg>
+          <svg class="mascot bear" viewBox="0 0 128 118">
+            <ellipse cx="64" cy="111" rx="34" ry="5.5" fill="#3c5aa8" opacity=".12"/>
+            <circle cx="30" cy="30" r="14" fill="#f6f9ff" stroke="#dde8ff" stroke-width="2"/>
+            <circle cx="98" cy="30" r="14" fill="#f6f9ff" stroke="#dde8ff" stroke-width="2"/>
+            <circle cx="30" cy="30" r="7" fill="#ffd8e3"/>
+            <circle cx="98" cy="30" r="7" fill="#ffd8e3"/>
+            <ellipse cx="64" cy="68" rx="45" ry="43" fill="url(#bg1)" stroke="#e3ecff" stroke-width="2"/>
+            <ellipse cx="64" cy="82" rx="21" ry="15" fill="#fdfdff"/>
+            <path d="M42 61c2.4-4.2 6.8-4.2 9.2 0" stroke="#3b3357" stroke-width="2.9" fill="none" stroke-linecap="round"/>
+            <path d="M76.8 61c2.4-4.2 6.8-4.2 9.2 0" stroke="#3b3357" stroke-width="2.9" fill="none" stroke-linecap="round"/>
+            <ellipse cx="35" cy="70" rx="7" ry="4.4" fill="#ffc4d5" opacity=".95"/>
+            <ellipse cx="93" cy="70" rx="7" ry="4.4" fill="#ffc4d5" opacity=".95"/>
+            <ellipse cx="64" cy="77" rx="5.6" ry="4" fill="#7d88ad"/>
+            <path d="M64 81v3M64 84c-3 4-7 3-8 0M64 84c3 4 7 3 8 0" stroke="#7d88ad" stroke-width="2.2" fill="none" stroke-linecap="round"/>
+          </svg>
+        </div>
+        <h2 id="resultTitle">참 잘했어요!</h2>
+        <p class="sub" id="resultSub">오늘의 연산 기록</p>
+        <div class="stars" id="resultStars"><i>★</i><i>★</i><i>★</i></div>
+        <div class="resultStats">
+          <div><span>맞힌 문제</span><b id="rCorrect">0/5</b></div>
+          <div><span>점수</span><b id="rScore">0점</b></div>
+          <div><span>걸린 시간</span><b id="rTime">00:00</b></div>
+        </div>
+        <p class="bestline" id="rBest"></p>
+        <div class="resultButtons">
+          <div class="btnrow" id="btnRow">
+            <button class="btn ghost" id="retryBtn" type="button">다시 풀기</button>
+            <button class="btn solid" id="nextBtn" type="button">다음 단계</button>
+          </div>
+          <button class="btn share" id="shareBtn" type="button">친구에게 공유하기</button>
+        </div>
+      </div>
+    </section>
+  </main>
+</div>
+
+<nav class="tabbar" aria-label="단계 선택">
+  <div class="tabs" id="tabs"></div>
+</nav>
+
+<div class="fx" id="fx" aria-hidden="true"></div>
+<div class="toast" id="toast" hidden></div>
+<div class="pausemask" id="pauseMask" hidden>
+  <div class="pausecard">
+    <p>잠깐 쉬는 중</p>
+    <span>시간도 멈췄어요</span>
+    <button class="btn solid" id="resumeBtn" type="button">계속하기</button>
+  </div>
+</div>
+
+<script>
+(function () {
+  'use strict';
+  var DATA = {"version":1,"total":840,"levels":[{"id":1,"name":"워밍업","short":"워밍업","time":90,"hint":"더하기·빼기·곱하기로 만들어 봐!","problems":[[9,5,7,21],[5,1,5,11],[9,8,5,22],[4,5,1,10],[9,2,5,16],[9,7,1,17],[6,3,3,12],[7,6,1,2],[3,8,3,27],[4,6,7,17],[5,5,2,8],[6,1,8,15],[1,7,8,16],[2,4,3,11],[9,9,1,19],[9,4,8,13],[7,4,4,15],[8,2,8,2],[1,5,2,8],[2,7,3,11],[6,9,2,17],[4,5,5,4],[3,6,3,15],[6,4,3,5],[7,6,2,11],[4,2,2,6],[1,8,9,18],[9,9,7,25],[1,3,8,12],[7,5,6,8],[5,2,4,11],[4,5,3,12],[2,1,9,12],[5,7,3,9],[5,5,7,7],[4,8,9,21],[8,4,8,4],[3,6,7,16],[6,6,3,24],[2,6,3,5],[8,6,4,10],[7,4,3,8],[5,2,8,11],[9,1,2,8],[9,5,9,13],[6,6,2,10],[8,2,5,18],[5,3,6,14],[7,3,2,12],[9,8,7,24],[1,8,5,4],[3,1,6,10],[4,1,4,1],[3,2,2,7],[9,4,3,10],[6,1,9,16],[4,4,7,1],[3,6,2,7],[1,7,7,1],[7,4,5,27],[9,3,2,14],[2,2,6,10],[4,8,2,14],[8,4,2,16],[4,2,3,10],[5,4,2,7],[9,3,3,3],[1,8,2,17],[4,5,7,16],[5,1,6,12],[6,5,3,21],[6,8,1,15],[7,8,5,20],[4,3,4,16],[1,5,6,12],[3,7,9,1],[6,5,7,23],[7,3,3,7],[8,3,7,18],[7,4,1,27],[7,9,9,25],[8,1,4,5],[5,5,1,11],[6,4,3,13],[9,5,9,23],[5,4,4,13],[9,5,4,18],[6,8,2,16],[4,5,9,29],[8,5,5,8],[2,5,3,10],[4,2,1,7],[7,6,4,17],[4,4,2,6],[9,5,6,8],[8,3,4,15],[2,9,4,7],[2,7,8,6],[8,4,1,5],[7,3,9,1],[3,7,4,17],[2,9,8,19],[8,1,5,4],[2,7,2,11],[9,6,1,14],[6,5,4,15],[9,5,5,9],[9,3,1,13],[4,2,4,12],[9,4,6,19],[8,4,5,28],[6,8,3,17],[4,1,6,11],[7,2,2,7],[6,9,4,19],[8,8,2,2],[4,5,6,14],[2,7,1,15],[8,7,1,16],[4,2,7,18],[3,8,3,14],[2,1,7,10],[3,3,7,13],[7,1,7,13],[7,5,7,9],[8,5,6,19],[8,6,4,18],[5,7,3,15],[8,1,9,18],[7,7,3,11],[8,2,3,13],[2,1,3,6],[2,9,5,16],[6,8,5,19],[9,8,3,20],[4,4,1,7],[9,1,7,15],[3,4,8,15],[8,1,2,9],[3,2,2,8]]},{"id":2,"name":"곱셈 탄탄","short":"곱셈","time":90,"hint":"곱셈이 들어간 식을 만들어 봐!","problems":[[6,8,8,40],[5,2,9,23],[5,6,9,39],[5,4,10,30],[4,9,7,43],[4,12,6,54],[3,3,2,18],[12,2,10,32],[4,2,12,28],[7,10,2,27],[4,12,2,50],[8,3,6,30],[8,8,10,54],[2,8,5,21],[3,12,10,46],[2,11,8,30],[4,6,5,34],[2,10,12,8],[12,4,4,52],[6,4,2,22],[5,8,10,30],[4,5,3,60],[9,3,4,21],[6,8,4,44],[5,8,2,38],[6,4,2,48],[5,3,11,38],[12,2,2,48],[8,6,4,52],[12,3,4,32],[5,8,7,47],[11,5,7,46],[11,4,8,36],[8,6,5,38],[4,9,5,31],[6,4,3,27],[5,3,7,8],[8,7,8,48],[11,3,12,21],[3,2,5,13],[8,3,2,14],[7,4,2,26],[5,6,2,32],[8,4,11,52],[11,3,5,26],[4,7,2,18],[6,4,6,30],[10,5,8,50],[4,4,10,6],[5,8,12,28],[7,5,10,25],[5,2,3,30],[3,7,10,11],[10,3,7,31],[3,5,7,22],[5,6,11,41],[11,6,10,56],[2,7,6,44],[7,5,2,17],[12,3,3,39],[3,6,6,39],[2,8,3,48],[10,3,11,43],[12,3,10,42],[7,3,2,23],[7,6,9,51],[9,4,8,41],[12,4,5,53],[2,10,10,30],[6,5,8,22],[2,7,8,22],[3,6,7,25],[8,3,7,17],[4,7,8,60],[5,4,5,15],[3,12,4,32],[4,11,11,55],[2,3,4,24],[5,2,2,20],[11,3,2,35],[4,8,8,40],[4,12,9,57],[10,2,6,22],[8,9,5,53],[4,6,3,22],[9,5,9,54],[3,4,11,23],[12,5,5,37],[2,4,3,24],[5,3,9,24],[10,6,4,56],[12,4,5,43],[9,2,2,36],[8,3,12,36],[2,4,4,18],[5,4,3,17],[9,10,2,29],[8,4,9,44],[11,4,12,32],[9,2,10,29],[9,6,2,21],[7,2,2,11],[4,8,5,37],[2,9,3,54],[3,2,3,18],[5,2,7,17],[2,12,9,33],[7,2,7,7],[7,9,12,51],[3,5,6,33],[3,9,4,39],[5,3,3,18],[3,5,6,21],[2,7,11,25],[2,3,10,32],[12,3,6,30],[6,3,2,12],[11,3,8,41],[3,10,2,60],[5,2,5,5],[6,3,12,42],[8,6,6,42],[8,3,7,29],[12,4,12,60],[8,7,4,52],[6,3,11,39],[5,5,11,14],[11,4,10,54],[9,4,9,45],[10,2,10,30],[5,11,2,27],[12,4,7,40],[6,3,6,24],[7,6,8,34],[5,4,5,25],[6,8,8,56],[3,7,6,45],[3,11,6,39],[6,5,9,21],[10,5,2,52]]},{"id":3,"name":"나눗셈 출동!","short":"나눗셈","time":85,"hint":"나눗셈도 함께! 딱 떨어지는 수로!","problems":[[12,10,10,12],[6,7,3,14],[10,2,2,10],[3,7,7,3],[6,6,3,8],[10,12,6,20],[4,11,4,11],[9,7,3,21],[11,12,6,9],[8,4,2,6],[6,2,8,24],[2,12,4,6],[6,3,4,6],[12,4,6,18],[9,12,4,6],[11,7,7,11],[6,4,6,4],[10,6,3,12],[9,3,7,21],[9,11,11,9],[3,6,3,1],[3,6,2,9],[5,12,3,20],[7,6,3,14],[10,12,2,16],[4,4,8,2],[9,8,8,9],[12,4,12,4],[12,12,8,18],[11,6,11,6],[8,2,8,32],[12,4,9,27],[9,6,2,27],[6,8,2,24],[9,6,3,11],[10,5,12,24],[2,8,4,4],[7,4,2,5],[9,10,5,18],[10,10,4,25],[12,10,12,10],[6,10,3,20],[12,6,10,20],[11,8,2,7],[8,4,5,10],[12,2,10,60],[8,6,8,6],[3,7,3,7],[8,10,2,13],[10,6,10,6],[10,2,4,1],[12,6,9,18],[12,6,6,12],[12,10,5,10],[4,4,2,6],[7,12,4,21],[3,8,2,7],[12,7,4,21],[4,3,3,4],[9,10,3,30],[9,8,2,5],[4,10,2,20],[7,12,6,14],[9,3,3,9],[11,10,2,16],[4,5,10,2],[10,12,4,13],[12,2,6,36],[3,11,11,3],[10,8,2,40],[4,12,8,6],[11,6,3,13],[10,3,3,10],[12,3,7,28],[10,5,10,5],[12,3,2,2],[3,4,2,1],[6,3,6,3],[9,7,9,7],[11,10,11,10],[11,6,3,9],[2,12,4,5],[12,3,8,32],[3,8,4,1],[5,7,7,5],[6,3,9,11],[5,9,3,8],[8,12,3,12],[4,3,2,6],[12,2,6,4],[12,3,10,14],[5,8,5,8],[11,4,11,4],[8,3,8,3],[2,12,3,6],[12,12,4,36],[10,5,3,6],[9,10,10,9],[9,4,2,18],[8,4,3,5],[4,7,2,14],[4,2,2,4],[12,3,11,44],[12,11,11,12],[9,12,6,11],[9,12,2,54],[12,4,6,8],[11,4,4,11],[2,10,10,2],[12,12,6,14],[10,5,9,11],[8,4,4,8],[10,5,5,10],[9,3,3,6],[11,7,11,7],[9,6,2,6],[12,6,5,10],[6,12,12,6],[7,12,2,1],[2,9,3,5],[2,6,3,4],[9,8,2,36],[7,11,11,7],[8,4,8,16],[6,3,3,6],[6,8,4,12],[4,6,8,3],[7,8,2,28],[8,10,10,8],[11,3,3,11],[10,2,10,50],[8,4,10,12],[3,10,5,5],[8,4,11,13],[8,7,8,7],[6,2,4,3],[9,4,2,11],[12,4,5,15],[10,8,8,10],[12,7,12,7]]},{"id":4,"name":"혼합계산 고수","short":"혼합","time":80,"hint":"곱셈·나눗셈을 먼저 계산해!","problems":[[36,32,2,52],[6,15,3,11],[28,8,4,30],[24,8,4,22],[21,27,3,30],[14,16,2,6],[2,18,2,11],[15,20,5,11],[34,22,2,45],[18,36,2,36],[20,20,10,18],[34,8,2,30],[15,30,15,13],[32,24,2,44],[28,36,2,46],[20,36,4,11],[24,16,4,20],[36,18,9,38],[20,22,2,9],[34,16,2,42],[20,14,2,27],[12,34,2,29],[9,18,9,11],[4,28,2,18],[36,24,2,48],[9,21,3,2],[3,24,3,11],[25,25,5,30],[10,30,5,16],[18,18,9,20],[26,8,2,22],[36,8,2,40],[12,20,4,7],[26,36,2,44],[2,32,2,18],[20,35,5,27],[24,16,2,16],[9,36,9,13],[22,33,11,25],[34,30,2,19],[24,34,2,41],[12,24,3,4],[28,8,2,32],[24,10,2,29],[30,24,2,18],[28,14,2,21],[30,27,3,21],[36,27,9,33],[18,6,2,15],[14,22,2,25],[8,8,4,10],[30,12,2,24],[12,8,4,10],[18,14,2,25],[24,10,2,19],[32,22,2,21],[36,32,4,44],[26,26,2,39],[10,35,5,3],[5,20,5,1],[2,4,2,4],[8,12,2,14],[24,24,2,12],[8,20,4,3],[16,16,2,24],[30,8,2,34],[8,18,2,17],[24,30,2,9],[18,4,2,16],[36,30,2,51],[22,5,15,97],[29,18,4,101],[21,14,5,91],[3,3,2,9],[10,9,7,73],[27,36,9,31],[30,12,6,32],[18,2,28,74],[35,3,28,119],[28,8,2,24],[32,5,4,52],[30,6,12,102],[20,6,16,116],[32,7,12,116],[9,2,23,55],[22,20,2,62],[3,3,8,27],[25,26,2,77],[8,5,14,78],[22,4,12,70],[16,9,2,34],[30,4,22,118],[19,8,7,75],[27,3,18,81],[32,8,2,36],[14,5,8,54],[12,4,18,84],[3,32,3,99],[32,4,7,4],[26,32,2,90],[3,10,9,93],[5,5,3,20],[18,17,5,103],[28,14,7,26],[32,2,5,42],[15,24,3,87],[33,9,9,114],[21,2,15,51],[9,4,2,17],[11,23,2,57],[12,4,4,28],[28,6,5,58],[16,12,2,40],[4,4,12,52],[8,16,6,104],[32,13,2,58],[24,2,9,6],[28,22,2,72],[29,2,7,43],[17,4,24,113],[10,2,4,18],[35,2,14,7],[15,2,3,9],[16,2,4,8],[4,2,28,60],[2,5,3,17],[8,16,7,120],[22,21,4,106],[32,35,2,102],[29,2,3,35],[16,5,3,31],[22,2,28,78],[26,2,36,98],[4,25,4,104],[19,3,33,118],[14,2,32,78],[18,20,4,98],[24,30,3,114],[24,3,19,81],[5,16,4,69]]},{"id":5,"name":"빈칸 3개 도전","short":"도전","time":75,"hint":"빈칸이 세 개! 침착하게!","problems":[[14,8,2,13,23],[15,12,12,2,87],[4,6,2,5,60],[8,4,12,4,96],[5,6,5,3,18],[12,7,3,4,32],[12,10,7,2,47],[12,12,9,2,14],[7,3,4,14,6],[14,7,15,3,90],[6,3,3,9,54],[7,15,12,4,19],[14,4,8,6,42],[11,7,8,2,39],[12,5,15,6,10],[12,3,6,10,34],[9,10,3,3,90],[4,12,10,5,46],[14,12,14,6,2],[7,3,10,3,70],[14,8,4,2,4],[10,5,8,5,80],[9,15,2,10,12],[11,9,3,15,23],[4,7,2,9,5],[6,2,10,4,43],[14,5,8,2,15],[12,10,6,1,21],[9,3,10,6,45],[11,3,10,10,33],[14,8,14,7,56],[6,12,6,4,8],[14,7,8,1,11],[6,12,15,6,36],[12,3,9,3,7],[6,10,15,2,6],[15,5,7,3,24],[12,6,6,1,11],[14,6,14,9,15],[11,3,3,14,25],[4,13,2,13,2],[10,2,15,5,5],[14,3,14,13,39],[8,2,4,5,3],[4,15,4,9,6],[3,10,3,5,2],[12,11,3,10,34],[2,10,10,5,40],[9,9,4,2,20],[9,9,5,5,81],[11,10,10,5,108],[10,12,6,9,2],[3,8,6,2,8],[15,14,3,3,67],[8,7,14,3,1],[8,6,8,2,4],[6,3,13,3,18],[8,9,6,4,108],[14,7,11,3,25],[7,4,14,12,24],[6,6,2,15,18],[14,11,2,14,22],[6,3,8,4,36],[12,4,12,1,16],[13,8,6,3,19],[12,8,11,11,96],[13,15,6,3,43],[14,15,10,3,63],[14,12,3,2,112],[11,9,11,5,45],[9,8,3,7,17],[2,10,11,5,44],[6,8,6,5,3],[9,7,3,4,25],[6,6,12,6,18],[14,2,12,7,91],[14,2,10,6,11],[12,13,13,3,15],[13,15,2,15,26],[6,11,3,9,22],[15,9,9,5,10],[12,3,8,7,25],[10,11,4,11,14],[8,3,12,3,6],[15,5,6,3,6],[4,6,4,6,16],[13,8,4,6,9],[3,4,6,3,14],[15,3,9,7,68],[15,3,4,2,3],[11,9,15,5,5],[6,3,9,9,18],[10,12,3,2,42],[11,3,8,2,18],[12,8,9,12,72],[2,4,4,4,6],[9,10,12,6,21],[14,7,12,6,96],[2,6,6,4,8],[15,13,5,2,41],[14,12,3,1,11],[8,15,4,15,45],[3,13,2,2,16],[10,6,2,5,25],[10,9,2,12,15],[15,10,15,5,50],[6,4,4,4,24],[5,11,12,6,18],[4,11,10,10,15],[8,5,14,7,80],[12,6,8,3,27],[7,8,8,15,105],[3,4,6,12,6],[3,11,12,3,37],[10,11,14,14,110],[9,5,15,7,10],[12,14,4,6,7],[7,15,3,6,37],[9,15,3,7,38],[15,3,15,3,10],[15,5,12,3,24],[12,2,10,13,29],[7,6,2,1,20],[5,11,12,6,27],[7,12,9,3,22],[2,14,7,5,9],[15,10,8,8,25],[12,4,10,6,63],[3,8,3,2,6],[9,15,3,14,31],[8,2,2,5,3],[15,5,12,11,47],[9,12,6,11,22],[10,11,12,2,15],[4,14,14,3,7],[12,4,15,8,26],[8,12,4,7,17],[8,5,10,13,52],[10,9,3,1,29],[3,13,3,12,1]]},{"id":6,"name":"왕전초 연산왕","short":"왕","time":70,"hint":"진짜 연산왕의 문제야!","problems":[[6,4,16,8,26],[19,11,24,3,107],[18,20,14,2,31],[16,2,18,3,12],[24,4,22,6,138],[8,3,15,3,23],[19,4,18,9,27],[20,4,14,7,12],[6,9,3,19,63],[16,24,20,4,35],[15,9,17,3,66],[21,7,14,2,70],[7,16,16,2,120],[24,24,2,12,24],[22,2,21,5,116],[15,13,4,2,4],[16,16,3,4,4],[18,2,5,12,69],[24,20,6,4,54],[24,18,6,3,18],[18,10,2,8,58],[20,12,24,4,26],[18,9,10,15,12],[14,11,16,2,146],[15,20,18,5,87],[14,9,16,2,118],[4,21,12,6,86],[13,6,12,2,49],[15,10,5,12,1],[18,6,18,3,9],[6,9,24,3,62],[14,20,24,4,134],[16,3,6,3,10],[4,2,20,3,62],[18,16,7,14,26],[23,4,16,8,31],[18,9,5,8,42],[24,12,20,8,162],[24,4,11,11,127],[24,6,24,4,100],[16,8,7,9,65],[15,2,21,3,1],[22,16,12,24,30],[12,15,4,2,182],[13,11,16,4,28],[10,22,2,15,175],[22,7,6,2,43],[12,15,18,2,147],[16,2,19,7,141],[12,2,24,2,2],[7,9,24,4,22],[8,12,5,2,38],[4,9,10,2,41],[15,16,18,6,63],[24,20,2,12,2],[20,12,4,4,21],[8,3,12,3,20],[17,19,8,4,34],[21,24,20,4,141],[20,16,9,3,68],[16,4,12,6,8],[22,11,18,3,88],[10,20,9,2,100],[22,10,2,2,25],[24,10,6,3,44],[8,18,24,16,35],[20,15,21,5,83],[24,4,10,5,22],[10,10,5,16,24],[10,18,2,4,19],[10,18,12,2,186],[5,2,4,2,9],[12,24,4,12,84],[24,12,6,9,13],[21,7,3,19,60],[21,24,8,3,85],[12,16,18,2,19],[20,14,9,18,13],[14,21,3,21,17],[14,16,24,3,142],[24,24,2,11,47],[3,7,12,6,17],[10,15,20,5,29],[18,9,8,24,15],[22,4,6,2,91],[7,17,22,2,35],[16,4,12,15,184],[12,20,12,4,29],[8,11,12,2,74],[15,20,10,5,37],[2,20,2,5,52],[16,4,9,4,25],[17,13,24,8,56],[15,21,2,6,8],[15,3,12,3,14],[16,4,5,24,124],[11,17,20,2,38],[20,14,20,2,44],[18,22,2,17,24],[2,6,16,4,4],[15,8,24,6,116],[14,11,6,2,151],[20,5,11,16,180],[4,23,8,2,96],[10,5,3,14,44],[6,12,3,4,22],[12,6,2,21,44],[20,6,15,5,117],[4,4,15,6,14],[21,12,12,3,69],[24,24,4,18,12],[24,3,21,9,31],[20,2,20,5,12],[17,12,16,4,65],[2,20,2,17,172],[24,4,18,2,87],[3,14,16,2,50],[20,10,6,15,16],[12,24,6,24,32],[15,18,7,3,57],[24,4,2,6,32],[18,3,21,7,24],[21,21,3,14,14],[3,15,4,3,23],[20,10,20,4,195],[18,6,4,12,51],[14,6,24,3,62],[4,7,9,3,25],[18,6,21,5,108],[21,15,3,11,76],[13,21,20,2,24],[12,3,24,8,3],[15,24,2,6,23],[3,16,6,3,35],[10,2,21,8,173],[3,18,3,21,129],[24,4,12,16,21],[6,15,9,3,18],[16,6,15,3,101],[16,12,10,2,76]]}]};
+  var OPS = ['+', '-', '×', '÷'];
+  var STORE = 'wangjeonMath.v1';
+  var PRAISE = ['정답! 멋져요!', '딱 맞았어요!', '완벽해요!', '연산왕이에요!', '최고예요!', '와, 정답!'];
+
+  function $(id) { return document.getElementById(id); }
+  function pad(n) { return n < 10 ? '0' + n : '' + n; }
+  function fmtTime(sec) { sec = Math.max(0, Math.ceil(sec)); return pad(Math.floor(sec / 60)) + ':' + pad(sec % 60); }
+  function shuffle(a) { for (var i = a.length - 1; i > 0; i--) { var j = Math.floor(Math.random() * (i + 1)); var t = a[i]; a[i] = a[j]; a[j] = t; } return a; }
+
+  var save = { best: {}, muted: false, lastLevel: 1 };
+  function readStore() {
+    try { var raw = localStorage.getItem(STORE); if (raw) { var o = JSON.parse(raw) || {}; return o; } } catch (e) {}
+    return {};
+  }
+  function writeStore() {
+    try { localStorage.setItem(STORE, JSON.stringify(save)); } catch (e) {}
+  }
+
+  /* ---------- math ---------- */
+  /* Expressions are evaluated the way a child writes them: ×/÷ terms are
+     finished first, then terms are added/subtracted left to right while a
+     running total is recorded. A negative running total means the child would
+     meet a negative number mid-calculation, which these levels never allow. */
+  function evalDetail(nums, ops) {
+    var terms = [{ sign: 1, parts: [nums[0]] }], i, last, op, v, j, o, x;
+    for (i = 0; i < ops.length; i++) {
+      op = ops[i];
+      last = terms[terms.length - 1];
+      if (op === '+') { terms.push({ sign: 1, parts: [nums[i + 1]] }); }
+      else if (op === '-') { terms.push({ sign: -1, parts: [nums[i + 1]] }); }
+      else { last.parts.push(op); last.parts.push(nums[i + 1]); }
+    }
+    var total = 0, partials = [], negative = false, divs = 0;
+    for (i = 0; i < terms.length; i++) {
+      v = terms[i].parts[0];
+      for (j = 1; j < terms[i].parts.length; j += 2) {
+        o = terms[i].parts[j]; x = terms[i].parts[j + 1];
+        if (o === '×') { v = v * x; }
+        else {
+          if (x === 0 || v % x !== 0) { return null; }
+          v = v / x;
+          divs++;
+        }
+      }
+      if (!isFinite(v)) { return null; }
+      total += terms[i].sign * v;
+      partials.push(total);
+      if (total < 0) { negative = true; }
+    }
+    return { value: total, partials: partials, negative: negative, divs: divs };
+  }
+  function evalOps(nums, ops) {
+    var d = evalDetail(nums, ops);
+    return d ? d.value : null;
+  }
+  function solveAll(nums) {
+    var k = nums.length - 1, n = Math.pow(4, k), out = [], mask, j, m, ops, d;
+    for (mask = 0; mask < n; mask++) {
+      ops = []; m = mask;
+      for (j = 0; j < k; j++) { ops.push(OPS[m & 3]); m = m >> 2; }
+      d = evalDetail(nums, ops);
+      if (d) { out.push({ ops: ops, val: d.value, negative: d.negative, divs: d.divs }); }
+    }
+    return out;
+  }
+  function countSolutions(p) {
+    var sols = solveAll(p.nums), n = 0, i;
+    for (i = 0; i < sols.length; i++) {
+      if (sols[i].val === p.target && !sols[i].negative) { n++; }
+    }
+    return n;
+  }
+  function solutionFor(p) {
+    var sols = solveAll(p.nums), best = null, bestScore = -1e9, i, j, sc, o, a, b, trivial;
+    for (i = 0; i < sols.length; i++) {
+      if (sols[i].val !== p.target || sols[i].negative) { continue; }
+      sc = 0;
+      for (j = 0; j < sols[i].ops.length; j++) {
+        o = sols[i].ops[j];
+        if (o !== '×' && o !== '÷') { continue; }
+        a = p.nums[j]; b = p.nums[j + 1];
+        trivial = (a === 1 || b === 1 || (o === '÷' && a === b));
+        sc += trivial ? -5 : (o === '÷' ? 6 : 5);   /* show real math in hints */
+      }
+      if (sc > bestScore) { bestScore = sc; best = sols[i]; }
+    }
+    if (!best) {
+      for (i = 0; i < sols.length; i++) { if (sols[i].val === p.target) { return sols[i]; } }
+    }
+    return best;
+  }
+  function exprString(nums, ops, target) {
+    var s = '' + nums[0], i;
+    for (i = 0; i < ops.length; i++) { s += ' ' + ops[i] + ' ' + nums[i + 1]; }
+    return s + ' = ' + target;
+  }
+
+  /* ---------- sound ---------- */
+  var actx = null, audioUnlocked = false;
+  function audio() {
+    if (!audioUnlocked) { return null; }
+    if (!actx) {
+      var C = window.AudioContext || window.webkitAudioContext;
+      if (!C) { return null; }
+      try { actx = new C(); } catch (e) { return null; }
+    }
+    if (actx.state === 'suspended' && actx.resume) { actx.resume(); }
+    return actx;
+  }
+  function beep(freq, delay, dur, type, vol) {
+    var c = audio(); if (!c) { return; }
+    var t0 = c.currentTime + delay;
+    var o = c.createOscillator(), g = c.createGain();
+    o.type = type || 'sine';
+    o.frequency.setValueAtTime(freq, t0);
+    g.gain.setValueAtTime(0.0001, t0);
+    g.gain.linearRampToValueAtTime(vol === undefined ? 0.16 : vol, t0 + 0.015);
+    g.gain.exponentialRampToValueAtTime(0.0001, t0 + dur);
+    o.connect(g); g.connect(c.destination);
+    o.start(t0); o.stop(t0 + dur + 0.03);
+  }
+  function sfx(kind) {
+    if (save.muted || !audioUnlocked) { return; }
+    if (kind === 'ok') { beep(784, 0, 0.16, 'sine', 0.15); beep(988, 0.09, 0.16, 'sine', 0.15); beep(1319, 0.19, 0.26, 'sine', 0.13); }
+    else if (kind === 'no') { beep(330, 0, 0.14, 'sine', 0.14); beep(247, 0.1, 0.22, 'sine', 0.13); }
+    else if (kind === 'tap') { beep(680, 0, 0.055, 'triangle', 0.07); }
+    else if (kind === 'nope') { beep(420, 0, 0.08, 'square', 0.05); }
+    else if (kind === 'win') { beep(523, 0, 0.2, 'sine', 0.14); beep(659, 0.11, 0.2, 'sine', 0.14); beep(784, 0.22, 0.2, 'sine', 0.14); beep(1047, 0.33, 0.34, 'sine', 0.13); }
+  }
+
+  /* ---------- state ---------- */
+  var S = {
+    level: 1, idx: 0, correct: 0, score: 0, streak: 0, bestStreak: 0,
+    problems: [], results: [], cur: null, ops: [], active: 0, attempts: 0,
+    timeLeft: 0, timeLimit: 0, elapsed: 0, timer: null, lastTick: 0,
+    paused: false, phase: 'play', round: 0, reason: '', timeBonus: 0, newRecord: false
+  };
+  var bags = {};
+
+  /* ---------- render ---------- */
+  function renderLevel() { $('lvText').textContent = 'Lv ' + S.level; }
+  function renderTime() { $('timeText').textContent = fmtTime(S.timeLeft); }
+  function renderScore() { $('scoreText').textContent = S.score + '점'; }
+  function renderDots() {
+    var d = $('dots'), i, s, cls;
+    d.innerHTML = '';
+    for (i = 0; i < 5; i++) {
+      s = document.createElement('span');
+      cls = 'dot';
+      if (S.results[i] === true) { cls += ' ok'; } else if (S.results[i] === false) { cls += ' no'; }
+      if (i === S.idx && S.phase !== 'result') { cls += ' now'; }
+      s.className = cls;
+      d.appendChild(s);
+    }
+  }
+  function renderEquation() {
+    var eq = $('equation'), nums = S.cur.nums, i, line, span, b, tot;
+    eq.innerHTML = '';
+    line = document.createElement('div');
+    line.className = 'expr' + (nums.length > 3 ? ' dense' : '');
+    for (i = 0; i < nums.length; i++) {
+      span = document.createElement('span');
+      span.className = 'eqnum';
+      span.textContent = nums[i];
+      line.appendChild(span);
+      if (i < S.ops.length) {
+        b = document.createElement('button');
+        b.type = 'button';
+        b.className = 'slot' + (S.ops[i] ? ' filled' : '') + (i === S.active ? ' active pulse' : '');
+        b.textContent = S.ops[i] || '?';
+        b.setAttribute('data-slot', i);
+        b.setAttribute('aria-label', (i + 1) + '번째 연산 기호 칸');
+        line.appendChild(b);
+      }
+    }
+    tot = document.createElement('div');
+    tot.className = 'eqtotal';
+    tot.innerHTML = '<span>=</span><span>' + S.cur.target + '</span>';
+    eq.appendChild(line);
+    eq.appendChild(tot);
+  }
+  function setMood(m) { $('mascots').setAttribute('data-mood', m); }
+  function feedback(text, kind) {
+    var f = $('feedback');
+    f.textContent = text || '';
+    f.className = 'feedback' + (text ? ' show' : '') + (kind ? ' ' + kind : '');
+  }
+  function shake() {
+    var c = $('card');
+    c.classList.remove('shake');
+    void c.offsetWidth;
+    c.classList.add('shake');
+    setTimeout(function () { c.classList.remove('shake'); }, 460);
+  }
+  function showSkip(on) { $('skipBtn').hidden = !on; }
+
+  /* ---------- round ---------- */
+  function dealFive(levelId) {
+    var pool = DATA.levels[levelId - 1].problems, out = [];
+    if (!bags[levelId] || !bags[levelId].length) {
+      bags[levelId] = shuffle(pool.slice());
+    }
+    while (out.length < 5) {
+      if (!bags[levelId].length) { bags[levelId] = shuffle(pool.slice()); }
+      out.push(bags[levelId].pop());
+    }
+    return out;
+  }
+
+  function startRound(levelId) {
+    stopTimer();
+    S.round++;
+    S.level = levelId;
+    S.idx = 0; S.correct = 0; S.score = 0; S.streak = 0; S.bestStreak = 0;
+    S.results = [null, null, null, null, null];
+    S.problems = dealFive(levelId);
+    S.timeLimit = DATA.levels[levelId - 1].time;
+    S.timeLeft = S.timeLimit;
+    S.elapsed = 0; S.phase = 'play'; S.paused = false; S.timeBonus = 0; S.newRecord = false;
+    var lv = DATA.levels[levelId - 1];
+    S.cur = { nums: S.problems[0].slice(0, S.problems[0].length - 1), target: S.problems[0][S.problems[0].length - 1], hint: lv.hint };
+    S.ops = new Array(S.cur.nums.length - 1);
+    for (var i = 0; i < S.ops.length; i++) { S.ops[i] = null; }
+    S.active = 0; S.attempts = 0;
+    S.cur.hint = lv.hint;
+    $('pauseMask').hidden = true;
+    $('resultView').hidden = true;
+    $('playView').hidden = false;
+    $('submitBtn').textContent = '제출하기';
+    $('submitBtn').classList.remove('retry');
+    showSkip(false);
+    feedback('', '');
+    setMood('idle');
+    renderLevel(); renderTime(); renderScore(); renderDots(); renderEquation();
+    updateTabs();
+    save.lastLevel = levelId; writeStore();
+    startTimer();
+  }
+
+  function newProblem() {
+    var p = S.problems[S.idx];
+    S.cur = { nums: p.slice(0, p.length - 1), target: p[p.length - 1], hint: DATA.levels[S.level - 1].hint };
+    S.ops = new Array(S.cur.nums.length - 1);
+    for (var i = 0; i < S.ops.length; i++) { S.ops[i] = null; }
+    S.active = 0; S.attempts = 0; S.phase = 'play';
+    $('submitBtn').textContent = '제출하기';
+    $('submitBtn').classList.remove('retry');
+    showSkip(false);
+    feedback('', '');
+    setMood('idle');
+    renderDots(); renderEquation();
+  }
+
+  function nextProblem() {
+    S.idx++;
+    if (S.idx >= 5) { finish('done'); return; }
+    newProblem();
+  }
+
+  /* ---------- timer ---------- */
+  function startTimer() {
+    stopTimer();
+    S.lastTick = Date.now();
+    S.timer = setInterval(tick, 250);
+  }
+  function stopTimer() { if (S.timer) { clearInterval(S.timer); S.timer = null; } }
+  function tick() {
+    var now = Date.now(), dt = (now - S.lastTick) / 1000;
+    S.lastTick = now;
+    if (S.paused || S.phase !== 'play') { return; }
+    S.timeLeft -= dt;
+    S.elapsed += dt;
+    if (S.timeLeft <= 0) { S.timeLeft = 0; renderTime(); finish('time'); return; }
+    renderTime();
+  }
+
+  /* ---------- play ---------- */
+  function placeOp(op) {
+    if (S.phase !== 'play' || S.paused) { return; }
+    var i = S.active, k, next = -1;
+    if (i === null || i < 0 || i >= S.ops.length) { return; }
+    S.ops[i] = op;
+    for (k = i + 1; k < S.ops.length; k++) { if (!S.ops[k]) { next = k; break; } }
+    if (next < 0) { for (k = 0; k < S.ops.length; k++) { if (!S.ops[k]) { next = k; break; } } }
+    S.active = next < 0 ? S.ops.length - 1 : next;
+    sfx('tap');
+    renderEquation();
+  }
+  function onSlot(i) {
+    if (S.phase !== 'play' || S.paused) { return; }
+    if (S.ops[i]) { S.ops[i] = null; }
+    S.active = i;
+    sfx('tap');
+    renderEquation();
+  }
+  function hintFor() {
+    if (S.level <= 2) { return '아깝다! 계산 순서를 다시 확인해 봐.'; }
+    return '곱셈·나눗셈을 먼저 계산해야 해!'; 
+  }
+  function submit() {
+    if (S.phase !== 'play' || S.paused) { return; }
+    var i;
+    for (i = 0; i < S.ops.length; i++) {
+      if (!S.ops[i]) {
+        S.active = i; renderEquation();
+        feedback('빈칸을 모두 채워 주세요!', 'bad');
+        shake(); sfx('nope');
+        return;
+      }
+    }
+    var det = evalDetail(S.cur.nums, S.ops);
+    if (!det) {
+      S.attempts++;
+      feedback('나눗셈은 딱 떨어질 때만 돼요. 다시 해 볼까?', 'bad');
+      shake(); sfx('no'); setMood('sad'); showSkip(true);
+      if (S.attempts >= 2) { showSolution(); }
+      setTimeout(function () { if (S.phase === 'play') { setMood('idle'); } }, 1200);
+      return;
+    }
+    if (det.negative) {
+      S.attempts++;
+      feedback('중간에 0보다 작은 수(음수)가 나와요! 다른 순서로 해 볼까?', 'bad');
+      shake(); sfx('no'); setMood('sad'); showSkip(true);
+      if (S.attempts >= 2) { showSolution(); }
+      setTimeout(function () { if (S.phase === 'play') { setMood('idle'); } }, 1400);
+      return;
+    }
+    if (det.value === S.cur.target) { onCorrect(); } else { onWrong(); }
+  }
+  function onCorrect() {
+    S.phase = 'feedback';
+    var token = S.round;
+    S.correct++;
+    S.streak++;
+    if (S.streak > S.bestStreak) { S.bestStreak = S.streak; }
+    S.score += 100 + Math.min(S.streak - 1, 4) * 25;
+    S.results[S.idx] = true;
+    var eq = exprString(S.cur.nums, S.ops, S.cur.target);
+    var many = countSolutions(S.cur);
+    var msg = PRAISE[Math.floor(Math.random() * PRAISE.length)] + ' ' + eq;
+    if (many > 1) { msg += ' (정답이 ' + many + '가지!)'; }
+    feedback(msg, 'ok');
+    renderScore(); renderDots(); setMood('happy');
+    confetti(); sfx('ok');
+    var card = $('card'); card.classList.remove('pop'); void card.offsetWidth; card.classList.add('pop');
+    setTimeout(function () { card.classList.remove('pop'); }, 420);
+    setTimeout(function () {
+      if (token !== S.round || S.phase !== 'feedback') { return; }
+      nextProblem();
+    }, 1350);
+  }
+  function onWrong() {
+    S.attempts++;
+    S.streak = 0;
+    setMood('sad');
+    var msg = hintFor();
+    if (S.attempts >= 2) { msg += ' ' + solutionText(); }
+    feedback(msg, 'bad');
+    shake(); sfx('no'); showSkip(true);
+    renderDots();
+    setTimeout(function () { if (S.phase === 'play') { setMood('idle'); } }, 1300);
+  }
+  function solutionText() {
+    var sol = solutionFor(S.cur);
+    if (!sol) { return ''; }
+    return '예) ' + exprString(S.cur.nums, sol.ops, S.cur.target);
+  }
+  function showSolution() {
+    var text = solutionText();
+    if (text) { feedback(feedbackText() + ' ' + text, 'bad'); }
+  }
+  function feedbackText() { return $('feedback').textContent || ''; }
+
+  function skipProblem() {
+    if (S.phase !== 'play') { return; }
+    var token = S.round;
+    S.phase = 'feedback';
+    S.streak = 0;
+    S.results[S.idx] = false;
+    feedback('괜찮아! 이 문제는 넘어갈게.', 'bad');
+    renderDots();
+    setTimeout(function () {
+      if (token !== S.round) { return; }
+      nextProblem();
+    }, 520);
+  }
+
+  /* ---------- finish ---------- */
+  function finish(reason) {
+    if (S.phase === 'result') { return; }
+    stopTimer();
+    S.phase = 'result';
+    S.reason = reason;
+    var i, stars;
+    for (i = 0; i < 5; i++) { if (S.results[i] !== true) { S.results[i] = false; } }
+    stars = S.correct >= 5 ? 3 : (S.correct >= 4 ? 2 : (S.correct >= 3 ? 1 : 0));
+    S.timeBonus = (reason === 'done' && S.correct > 0) ? Math.round(Math.max(0, S.timeLeft)) * 2 : 0;
+    S.score += S.timeBonus;
+
+    save.best = save.best || {};
+    var b = save.best[S.level] || { score: 0, stars: 0 };
+    S.newRecord = S.score > (b.score || 0);
+    if (S.score > (b.score || 0)) { b.score = S.score; }
+    if (stars > (b.stars || 0)) { b.stars = stars; }
+    save.best[S.level] = b;
+    writeStore();
+    updateTabs();
+    renderResult(stars);
+    if (stars > 0) { confetti(); sfx('win'); } else { sfx('no'); }
+  }
+
+  function renderResult(stars) {
+    $('playView').hidden = true;
+    $('resultView').hidden = false;
+    var titles = ['다시 도전해 볼까요?', '조금만 더 힘내요!', '좋아요! 잘하고 있어요', '정말 잘했어요!', '완벽해요!'];
+    $('resultTitle').textContent = S.reason === 'time' && S.correct < 5 ? '시간이 다 됐어요!' : titles[Math.min(S.correct, 4)];
+    $('resultSub').textContent = DATA.levels[S.level - 1].name + ' · ' + (S.reason === 'time' ? '시간 종료' : '5문제 완주');
+    var st = $('resultStars'), i, txt = '';
+    for (i = 0; i < 3; i++) {
+      txt += '<i class="' + (i < stars ? 'on' : 'off') + '">★</i>';
+    }
+    st.innerHTML = txt;
+    $('rCorrect').textContent = S.correct + '/5';
+    $('rScore').textContent = S.score + '점';
+    $('rTime').textContent = fmtTime(S.elapsed);
+    var b = (save.best && save.best[S.level]) || { score: 0 };
+    var bestLine = '최고 기록 ' + (b.score || 0) + '점';
+    if (S.timeBonus > 0) { bestLine = '시간 보너스 +' + S.timeBonus + '점 · ' + bestLine; }
+    $('rBest').innerHTML = bestLine + (S.newRecord ? '<span class="new">새 기록!</span>' : '');
+    $('nextBtn').hidden = S.level >= DATA.levels.length;
+    $('nextBtn').textContent = '다음 단계';
+    $('retryBtn').textContent = '다시 풀기';
+    $('btnRow').className = 'btnrow' + (S.level >= DATA.levels.length ? ' solo' : '');
+    window.scrollTo(0, 0);
+  }
+
+  /* ---------- tabs ---------- */
+  function updateTabs() {
+    var bar = $('tabs'), i, tab, lv, st, mark;
+    if (!bar.children.length) { return; }
+    for (i = 0; i < bar.children.length; i++) {
+      tab = bar.children[i];
+      lv = parseInt(tab.getAttribute('data-level'), 10);
+      if (lv === S.level) { tab.classList.add('active'); } else { tab.classList.remove('active'); }
+      mark = tab.querySelector('.mark');
+      st = save.best && save.best[lv] && save.best[lv].stars ? save.best[lv].stars : 0;
+      mark.textContent = st >= 3 ? '♛' : (st >= 1 ? '★' : '');
+    }
+  }
+  function buildTabs() {
+    var bar = $('tabs'), i, lv, b;
+    for (i = 0; i < DATA.levels.length; i++) {
+      lv = DATA.levels[i];
+      b = document.createElement('button');
+      b.type = 'button';
+      b.className = 'tab';
+      b.setAttribute('data-level', lv.id);
+      b.setAttribute('aria-label', lv.id + '단계 ' + lv.name);
+      b.innerHTML = '<span class="mark"></span><span class="tn">' + lv.id + '</span><span class="tl">' + lv.short + '</span>';
+      bar.appendChild(b);
+    }
+    bar.addEventListener('click', function (e) {
+      var t = e.target;
+      while (t && t !== bar && !(t.getAttribute && t.getAttribute('data-level'))) { t = t.parentNode; }
+      if (!t || t === bar) { return; }
+      startRound(parseInt(t.getAttribute('data-level'), 10));
+    });
+  }
+
+  /* ---------- fx ---------- */
+  function confetti() {
+    var fx = $('fx'), colors = ['#ffd257', '#7fd0ff', '#ff9ec4', '#8ef0c8', '#c7a6ff', '#ffffff'];
+    var w = window.innerWidth, h = window.innerHeight, i, s;
+    for (i = 0; i < 26; i++) {
+      s = document.createElement('span');
+      s.className = 'spark';
+      s.style.left = Math.round(w / 2 + (Math.random() * 180 - 90)) + 'px';
+      s.style.top = Math.round(h * 0.3 + Math.random() * 40) + 'px';
+      s.style.background = colors[i % colors.length];
+      s.style.setProperty('--dx', Math.round(Math.random() * 260 - 130) + 'px');
+      s.style.animationDuration = (0.9 + Math.random() * 0.8).toFixed(2) + 's';
+      s.style.animationDelay = (Math.random() * 0.18).toFixed(2) + 's';
+      if (i % 3 === 0) { s.style.borderRadius = '50%'; }
+      if (i % 5 === 0) { s.style.width = '12px'; s.style.height = '12px'; }
+      fx.appendChild(s);
+      (function (el) {
+        setTimeout(function () { if (el.parentNode) { el.parentNode.removeChild(el); } }, 2200);
+      })(s);
+    }
+  }
+  var toastTimer = null;
+  function toast(msg) {
+    var t = $('toast');
+    t.textContent = msg;
+    t.hidden = false;
+    if (toastTimer) { clearTimeout(toastTimer); }
+    toastTimer = setTimeout(function () { t.hidden = true; }, 2800);
+  }
+
+  /* ---------- share ---------- */
+  function copyLink(url) {
+    function done(ok) {
+      toast(ok ? '링크를 복사했어요! 친구에게 붙여넣기 해 주세요.' : '주소창의 주소를 복사해 주세요: ' + url);
+    }
+    function fallback() {
+      var ta = document.createElement('textarea');
+      ta.value = url;
+      ta.setAttribute('readonly', 'readonly');
+      ta.style.position = 'fixed';
+      ta.style.top = '-1000px';
+      ta.style.opacity = '0';
+      document.body.appendChild(ta);
+      ta.select();
+      var ok = false;
+      try { ok = document.execCommand('copy'); } catch (e) { ok = false; }
+      document.body.removeChild(ta);
+      done(ok);
+    }
+    try {
+      if (navigator.clipboard && navigator.clipboard.writeText) {
+        navigator.clipboard.writeText(url).then(function () { done(true); }, fallback);
+        return;
+      }
+    } catch (e) {}
+    fallback();
+  }
+  function shareGame() {
+    var url = location.href.split('#')[0];
+    var payload = { title: '왕전초 연산왕', text: '연산 기호를 넣어 식을 완성하는 연산 게임! 같이 해 봐요.', url: url };
+    if (navigator.share) {
+      try {
+        navigator.share(payload)['catch'](function () { copyLink(url); });
+        return;
+      } catch (e) {}
+    }
+    copyLink(url);
+  }
+
+  /* ---------- pause ---------- */
+  function setPaused(on) {
+    if (S.phase !== 'play') { return; }
+    S.paused = !!on;
+    $('pauseMask').hidden = !S.paused;
+    if (!S.paused) { S.lastTick = Date.now(); }
+  }
+
+  /* ---------- manifest ---------- */
+  function setupManifest() {
+    var link = $('manifestLink');
+    var icon = document.querySelector('link[rel="apple-touch-icon"]');
+    var href = icon ? icon.getAttribute('href') : '';
+    var mf = {
+      name: '왕전초 연산왕', short_name: '연산왕',
+      description: '연산 기호를 넣어 식을 완성하는 초등 연산 퍼즐 게임',
+      start_url: '.', scope: '.', display: 'standalone', orientation: 'portrait',
+      background_color: '#eaf4ff', theme_color: '#2f5cf0',
+      icons: [{ src: href, sizes: '512x512', type: 'image/svg+xml', purpose: 'any maskable' }]
+    };
+    try {
+      link.setAttribute('href', 'data:application/manifest+json;charset=utf-8,' + encodeURIComponent(JSON.stringify(mf)));
+    } catch (e) {}
+  }
+
+  function applyMute() {
+    $('sndOnIcon').style.display = save.muted ? 'none' : '';
+    $('sndOffIcon').style.display = save.muted ? '' : 'none';
+    $('sndBtn').className = 'iconbtn' + (save.muted ? ' off' : '');
+    $('sndBtn').setAttribute('aria-label', save.muted ? '효과음 켜기' : '효과음 끄기');
+  }
+
+  /* ---------- events ---------- */
+  function bind() {
+    var ops = document.querySelectorAll('.opbtn'), i;
+    for (i = 0; i < ops.length; i++) {
+      ops[i].addEventListener('click', function () {
+        placeOp(this.getAttribute('data-op'));
+      });
+    }
+    $('equation').addEventListener('click', function (e) {
+      var t = e.target;
+      while (t && t !== this && !(t.getAttribute && t.getAttribute('data-slot') !== null && t.getAttribute('data-slot') !== '')) { t = t.parentNode; }
+      if (!t || t === this) { return; }
+      onSlot(parseInt(t.getAttribute('data-slot'), 10));
+    });
+    $('submitBtn').addEventListener('click', submit);
+    $('skipBtn').addEventListener('click', skipProblem);
+    $('refreshBtn').addEventListener('click', function () {
+      if (S.phase !== 'play') { return; }
+      sfx('tap');
+      // replace current problem with a fresh one from the level's bag
+      var levelId = S.level, pool = DATA.levels[levelId - 1].problems, p, guard = 0;
+      if (!bags[levelId] || !bags[levelId].length) { bags[levelId] = shuffle(pool.slice()); }
+      p = bags[levelId].pop();
+      while (guard < 20 && p.join(',') === S.problems[S.idx].join(',')) { bags[levelId].unshift(p); p = bags[levelId].pop(); guard++; }
+      S.problems[S.idx] = p;
+      newProblem();
+    });
+    $('retryBtn').addEventListener('click', function () { sfx('tap'); startRound(S.level); });
+    $('nextBtn').addEventListener('click', function () { sfx('tap'); startRound(Math.min(DATA.levels.length, S.level + 1)); });
+    $('shareBtn').addEventListener('click', shareGame);
+    $('sndBtn').addEventListener('click', function () {
+      audioUnlocked = true;
+      save.muted = !save.muted;
+      writeStore();
+      applyMute();
+      if (!save.muted) { sfx('tap'); toast('효과음을 켰어요'); } else { toast('효과음을 껐어요'); }
+    });
+    $('pauseBtn').addEventListener('click', function () { setPaused(true); });
+    $('resumeBtn').addEventListener('click', function () { setPaused(false); });
+    document.addEventListener('keydown', function (e) {
+      if (e.key === '+' || e.key === '=') { placeOp('+'); }
+      else if (e.key === '-' || e.key === '−') { placeOp('-'); }
+      else if (e.key === '*' || e.key === 'x' || e.key === 'X') { placeOp('×'); }
+      else if (e.key === '/') { placeOp('÷'); }
+      else if (e.key === 'Enter') { if (!$('resultView').hidden) { return; } submit(); }
+    });
+    document.addEventListener('pointerdown', function () { audioUnlocked = true; }, { once: true });
+  }
+
+  function init() {
+    var stored = readStore();
+    save.best = stored.best || {};
+    save.muted = !!stored.muted;
+    save.lastLevel = stored.lastLevel || 1;
+    if (save.lastLevel < 1 || save.lastLevel > DATA.levels.length) { save.lastLevel = 1; }
+    applyMute();
+    buildTabs();
+    bind();
+    setupManifest();
+    startRound(save.lastLevel);
+  }
+
+  /* test hook */
+  window.__wangjeon = {
+    evalOps: evalOps, evalDetail: evalDetail, solveAll: solveAll, countSolutions: countSolutions,
+    solutionFor: solutionFor, exprString: exprString, DATA: DATA, state: S,
+    startRound: startRound, submit: submit, placeOp: placeOp, onSlot: onSlot, finish: finish
+  };
+
+  if (document.readyState === 'loading') {
+    document.addEventListener('DOMContentLoaded', init);
+  } else {
+    init();
+  }
+})();
+</script>
+</body>
+</html>
