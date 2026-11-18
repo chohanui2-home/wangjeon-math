@@ -3,7 +3,7 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
-<title>왕전초 연산왕</title>
+<title>♡왕전초 연산왕!♡</title>
 <meta name="theme-color" content="#dcecff">
 <meta name="mobile-web-app-capable" content="yes">
 <meta name="apple-mobile-web-app-capable" content="yes">
@@ -42,8 +42,17 @@ button{font-family:inherit;cursor:pointer}
   padding:calc(8px + env(safe-area-inset-top)) 16px calc(104px + env(safe-area-inset-bottom));
   min-height:100vh;min-height:100dvh;display:flex;flex-direction:column;
 }
-.topbar{display:flex;align-items:center;justify-content:space-between;gap:6px;padding:2px 0 10px}
-.topbar h1{margin:0;font-size:19px;font-weight:900;letter-spacing:-.03em}
+.topbar{display:flex;align-items:center;justify-content:space-between;gap:6px;padding:4px 0 12px}
+.topbar h1{
+  margin:0;flex:1 1 auto;min-width:0;text-align:center;
+  font-size:clamp(20px,6.4vw,26px);font-weight:900;line-height:1.2;
+  letter-spacing:-.045em;white-space:nowrap;color:#1f46c4;
+  text-shadow:0 1px 0 #fff,0 2px 0 rgba(255,255,255,.7),0 6px 14px rgba(47,92,240,.22);
+}
+.topbar h1 .hh{
+  color:#ff5f95;font-weight:900;font-size:.94em;vertical-align:.02em;padding:0 .04em;
+  text-shadow:0 1px 0 #fff,0 2px 0 rgba(255,255,255,.7),0 6px 14px rgba(255,95,149,.28);
+}
 .topright{display:flex;gap:6px;align-items:center}
 .iconbtn{
   width:38px;height:38px;flex:0 0 auto;border-radius:13px;border:none;background:#fff;
@@ -242,13 +251,17 @@ button{font-family:inherit;cursor:pointer}
   .statusbar{padding:11px 4px}
   .stat b{font-size:16px}
 }
+@media (max-width:344px){
+  .topbar h1{font-size:17.5px}
+  .topbar h1 .hh{font-size:.9em}
+}
 </style>
 </head>
 <body>
 <div class="app">
   <header class="topbar">
     <div class="spacer"></div>
-    <h1>왕전초 연산왕</h1>
+    <h1><span class="hh">♡</span>왕전초 연산왕!<span class="hh">♡</span></h1>
     <div class="topright">
       <button class="iconbtn" id="sndBtn" type="button" aria-label="효과음 켜기/끄기">
         <svg id="sndOnIcon" viewBox="0 0 24 24" aria-hidden="true"><path d="M4 9.5h3.2L12 5.6v12.8L7.2 14.5H4z"/><path d="M15.6 8.6a4.6 4.6 0 0 1 0 6.8"/><path d="M18.2 6a8 8 0 0 1 0 12"/></svg>
@@ -959,7 +972,7 @@ button{font-family:inherit;cursor:pointer}
   }
   function shareGame() {
     var url = location.href.split('#')[0];
-    var payload = { title: '왕전초 연산왕', text: '연산 기호를 넣어 식을 완성하는 연산 게임! 같이 해 봐요.', url: url };
+    var payload = { title: '♡왕전초 연산왕!♡', text: '연산 기호를 넣어 식을 완성하는 연산 게임! 같이 해 봐요.', url: url };
     if (navigator.share) {
       try {
         navigator.share(payload)['catch'](function () { copyLink(url); });
@@ -983,7 +996,7 @@ button{font-family:inherit;cursor:pointer}
     var icon = document.querySelector('link[rel="apple-touch-icon"]');
     var href = icon ? icon.getAttribute('href') : '';
     var mf = {
-      name: '왕전초 연산왕', short_name: '연산왕',
+      name: '♡왕전초 연산왕!♡', short_name: '연산왕',
       description: '연산 기호를 넣어 식을 완성하는 초등 연산 퍼즐 게임',
       start_url: '.', scope: '.', display: 'standalone', orientation: 'portrait',
       background_color: '#eaf4ff', theme_color: '#2f5cf0',
