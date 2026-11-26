@@ -257,6 +257,51 @@ button{font-family:inherit;cursor:pointer}
   .topbar h1{font-size:19px}
   .topbar h1 .hh{font-size:.92em}
 }
+/* ==== RECORD PANEL (shared) — ♡왕전초 놀이터 기록 남기기 ==== */
+.grec{margin:10px 0 0;padding:10px 10px 9px;border:1.5px solid #dfe6f0;border-radius:14px;background:#fbfdff;text-align:center}
+.grec[hidden]{display:none}
+.grec-h{margin:0;font-size:13px;font-weight:900;color:#25324a;letter-spacing:-.02em}
+.grec-sub{margin:2px 0 0;font-size:11px;font-weight:800;color:#7a8798;letter-spacing:-.01em;word-break:keep-all}
+.grec-row{display:flex;gap:6px;margin-top:8px}
+.grec-f{flex:1 1 0;min-width:0;display:flex;flex-direction:column;gap:3px;font-size:10.5px;font-weight:900;color:#6b7890;letter-spacing:-.01em}
+.grec-f input{
+  width:100%;height:40px;border:1.5px solid #d6deea;border-radius:11px;background:#fff;
+  text-align:center;font:inherit;font-size:16px;font-weight:900;color:#1f2937;padding:0 2px;
+  -webkit-appearance:none;appearance:none;
+}
+.grec-f input::placeholder{font-size:12px;font-weight:800;color:#b3bdcc}
+.grec-f input:focus{outline:none;border-color:#3b82f6;box-shadow:0 0 0 3px rgba(59,130,246,.16)}
+.grec-f input::-webkit-outer-spin-button,.grec-f input::-webkit-inner-spin-button{-webkit-appearance:none;margin:0}
+.grec-btn{
+  margin-top:8px;width:100%;height:42px;border:none;border-radius:12px;cursor:pointer;
+  background:linear-gradient(180deg,#3b82f6,#2563eb);color:#fff;font:inherit;font-size:15px;font-weight:900;
+  letter-spacing:-.02em;box-shadow:0 3px 0 #1d4ed8;
+}
+.grec-btn:active{transform:translateY(2px);box-shadow:0 1px 0 #1d4ed8}
+.grec-btn[disabled]{background:#9aa7b8;box-shadow:0 3px 0 #7d8a9b;cursor:default}
+.grec-btn[disabled]:active{transform:none}
+.grec-msg{margin:7px 0 0;min-height:15px;font-size:11.5px;font-weight:900;color:#2563eb;line-height:1.35;word-break:keep-all}
+.grec-msg.bad{color:#dc2626}
+.grec-mask{position:fixed;inset:0;z-index:80;display:flex;align-items:center;justify-content:center;padding:14px;background:rgba(17,24,39,.45)}
+.grec-mask[hidden]{display:none}
+.grec-sheet{width:100%;max-width:340px;max-height:calc(100% - 10px);overflow:auto;background:#fff;border-radius:20px;padding:15px 14px 12px;box-shadow:0 20px 44px rgba(15,23,42,.3);text-align:center}
+.grec-ttl{margin:0;font-size:17px;font-weight:900;color:#1f2937;letter-spacing:-.03em}
+.grec-sum{margin:4px 0 0;font-size:12px;font-weight:800;color:#6b7890;word-break:keep-all}
+.grec-close{margin-top:10px;width:100%;height:40px;border:none;border-radius:12px;background:#eef2f7;color:#42516a;font:inherit;font-size:14px;font-weight:900;cursor:pointer}
+.grec-close:active{background:#e2e8f1}
+@media (max-height:520px){
+  .grec-sheet{padding:11px 12px 9px}
+  .grec-f input{height:36px}
+  .grec-btn{height:38px;margin-top:6px}
+}
+.homebtn{
+  display:inline-flex;align-items:center;gap:4px;height:30px;padding:0 10px;border-radius:10px;
+  background:#FFFFFF;border:1px solid rgba(120,132,152,.34);color:#3C4657;text-decoration:none;
+  font:inherit;font-size:12px;font-weight:900;letter-spacing:-.02em;line-height:1;
+  -webkit-tap-highlight-color:transparent;white-space:nowrap;
+}
+.homebtn:active{transform:translateY(1px)}
+/* ==== /RECORD PANEL ==== */
 </style>
 </head>
 <body>
@@ -265,6 +310,7 @@ button{font-family:inherit;cursor:pointer}
     <h1><span class="hh">♡</span>왕전초 연산왕!<span class="hh">♡</span></h1>
   </header>
   <div class="toptools">
+    <a class="homebtn" href="https://chohanui2-home.github.io/games/" aria-label="다른 게임 고르기">🏠 다른 게임</a>
     <button class="iconbtn" id="sndBtn" type="button" aria-label="효과음 켜기/끄기">
       <svg id="sndOnIcon" viewBox="0 0 24 24" aria-hidden="true"><path d="M4 9.5h3.2L12 5.6v12.8L7.2 14.5H4z"/><path d="M15.6 8.6a4.6 4.6 0 0 1 0 6.8"/><path d="M18.2 6a8 8 0 0 1 0 12"/></svg>
       <svg id="sndOffIcon" viewBox="0 0 24 24" aria-hidden="true" style="display:none"><path d="M4 9.5h3.2L12 5.6v12.8L7.2 14.5H4z"/><path d="M16 9.5l5 5M21 9.5l-5 5"/></svg>
@@ -412,6 +458,7 @@ button{font-family:inherit;cursor:pointer}
           <div><span>걸린 시간</span><b id="rTime">00:00</b></div>
         </div>
         <p class="bestline" id="rBest"></p>
+        <div id="recSlot"></div>
         <div class="resultButtons">
           <div class="btnrow" id="btnRow">
             <button class="btn ghost" id="retryBtn" type="button">다시 풀기</button>
@@ -439,6 +486,245 @@ button{font-family:inherit;cursor:pointer}
 </div>
 
 <script>
+/* ==== RECORD PANEL (shared) — ♡왕전초 놀이터 기록 남기기 ==== */
+/* 학년·번호(필수) + 이름(선택)을 적어 Supabase game_records 에 한 줄 남긴다.
+   공용 태블릿 원칙: 브라우저 저장소를 쓰지 않는다(새로고침하면 깨끗).
+   한 판이 끝나면 reset() 으로 다시 등록할 수 있게 한다. */
+var GameRec = (function () {
+  'use strict';
+
+  var API = 'https://hlqyzstixodeqywgfmvg.supabase.co';
+  var KEY = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6ImhscXl6c3RpeG9kZXF5d2dmbXZnIiwicm9sZSI6ImFub24iLCJpYXQiOjE3OTQ4MjEwNDcsImV4cCI6MjExMDM5NzA0N30.pgZlwx_9cNMM9CjUag6SBl5k5unOM2SI9f0yn3HA2cQ';
+
+  var PANEL =
+    '<section class="grec" id="grec" hidden aria-label="기록 남기기">' +
+      '<p class="grec-h">🏆 기록 남기기</p>' +
+      '<p class="grec-sub" id="grecSub"></p>' +
+      '<div class="grec-row">' +
+        '<label class="grec-f"><span>학년</span>' +
+          '<input id="grecGrade" type="number" inputmode="numeric" min="1" max="6" step="1" placeholder="3" autocomplete="off" enterkeyhint="next"></label>' +
+        '<label class="grec-f"><span>번호</span>' +
+          '<input id="grecNum" type="number" inputmode="numeric" min="1" max="99" step="1" placeholder="12" autocomplete="off" enterkeyhint="next"></label>' +
+        '<label class="grec-f"><span>이름</span>' +
+          '<input id="grecName" type="text" maxlength="10" placeholder="선택" autocomplete="off" enterkeyhint="done"></label>' +
+      '</div>' +
+      '<button class="grec-btn" id="grecBtn" type="button">등록</button>' +
+      '<p class="grec-msg" id="grecMsg" role="status" aria-live="polite"></p>' +
+    '</section>';
+
+  var MASK =
+    '<div class="grec-mask" id="grecMask" hidden>' +
+      '<div class="grec-sheet" role="dialog" aria-modal="true" aria-label="기록 남기기">' +
+        '<p class="grec-ttl" id="grecTtl">🏆 기록 남기기</p>' +
+        '<p class="grec-sum" id="grecSum"></p>' +
+        PANEL +
+        '<button class="grec-close" id="grecClose" type="button">닫기</button>' +
+      '</div>' +
+    '</div>';
+
+  var cfg = null;          /* {id, title, result:function(){...}} */
+  var modal = false;
+  var mem = { g: '', n: '', s: '' };
+  var sent = false, busy = false, wired = false;
+
+  function $(id) { return document.getElementById(id); }
+
+  function post(fn, body, done) {
+    var xhr = new XMLHttpRequest();
+    var finished = false;
+    function end(err, data) {
+      if (finished) { return; }
+      finished = true;
+      done(err, data);
+    }
+    try {
+      xhr.open('POST', API + '/rest/v1/rpc/' + fn, true);
+      xhr.setRequestHeader('Content-Type', 'application/json');
+      xhr.setRequestHeader('apikey', KEY);
+      xhr.setRequestHeader('Authorization', 'Bearer ' + KEY);
+      xhr.setRequestHeader('Accept', 'application/json');
+      xhr.timeout = 10000;
+      xhr.onload = function () {
+        var data = null;
+        try { data = JSON.parse(xhr.responseText); } catch (e) {}
+        if (xhr.status >= 200 && xhr.status < 300) { end(null, data); }
+        else { end('http_' + xhr.status, data); }
+      };
+      xhr.onerror = function () { end('network', null); };
+      xhr.ontimeout = function () { end('timeout', null); };
+      xhr.send(JSON.stringify(body));
+    } catch (e) {
+      end('client', null);
+    }
+  }
+
+  function say(text, bad) {
+    var m = $('grecMsg');
+    if (!m) { return; }
+    m.textContent = text || '';
+    m.className = 'grec-msg' + (bad ? ' bad' : '');
+  }
+
+  function btn() { return $('grecBtn'); }
+
+  function resultText(r) {
+    if (!r) { return ''; }
+    var bits = [];
+    if (r.detail) { bits.push(r.detail); }
+    if (typeof r.score === 'number') { bits.push('기록 ' + r.score); }
+    if (typeof r.durationSec === 'number' && r.durationSec > 0) {
+      var s = Math.round(r.durationSec);
+      bits.push(Math.floor(s / 60) + '분 ' + (s % 60) + '초');
+    }
+    return bits.join(' · ');
+  }
+
+  function refresh() {
+    var r = cfg && cfg.result ? cfg.result() : null;
+    var sub = $('grecSub'), sum = $('grecSum');
+    var txt = resultText(r);
+    if (sub) { sub.textContent = txt; }
+    if (sum) { sum.textContent = txt; }
+  }
+
+  function submit() {
+    if (!cfg || busy || sent) { return; }
+    var gEl = $('grecGrade'), nEl = $('grecNum'), sEl = $('grecName');
+    var g = parseInt(gEl.value, 10), n = parseInt(nEl.value, 10);
+    var s = (sEl.value || '').replace(/\s+/g, ' ').trim();
+    if (!(g >= 1 && g <= 6)) {
+      say('학년을 1~6 사이 숫자로 적어 주세요.', true);
+      try { gEl.focus(); } catch (e) {}
+      return;
+    }
+    if (!(n >= 1 && n <= 99)) {
+      say('번호를 1~99 사이 숫자로 적어 주세요.', true);
+      try { nEl.focus(); } catch (e) {}
+      return;
+    }
+    mem.g = String(g); mem.n = String(n); mem.s = s ? s.slice(0, 10) : '';
+
+    var r = (cfg.result && cfg.result()) || {};
+    var body = {
+      p_game_id: cfg.id,
+      p_game_title: cfg.title,
+      p_grade: g,
+      p_student_num: n,
+      p_student_name: mem.s || null,
+      p_score: Math.max(0, Math.round(typeof r.score === 'number' ? r.score : 0)),
+      p_detail: r.detail || null,
+      p_duration_sec: (typeof r.durationSec === 'number' && r.durationSec > 0)
+        ? Math.round(r.durationSec * 10) / 10 : null
+    };
+
+    busy = true;
+    btn().disabled = true;
+    btn().textContent = '보내는 중…';
+    say('');
+
+    post('game_record_submit', body, function (err, data) {
+      busy = false;
+      if (!err && data && data.ok) {
+        sent = true;
+        btn().textContent = '등록 완료 ✓';
+        say('등록 완료! 다음 친구는 새로 시작해 주세요.');
+      } else {
+        btn().disabled = false;
+        btn().textContent = '다시 보내기';
+        say(err === 'network' || err === 'timeout'
+          ? '인터넷이 잠깐 끊긴 것 같아요. 다시 눌러 주세요.'
+          : '지금은 기록을 못 보냈어요. 잠시 뒤 다시 눌러 주세요.', true);
+      }
+    });
+  }
+
+  function wire() {
+    if (wired) { return; }
+    wired = true;
+    var gEl = $('grecGrade'), nEl = $('grecNum'), sEl = $('grecName'), b = btn(), c = $('grecClose');
+    if (!gEl || !b) { return; }
+    var clear = function () { if (!sent) { say(''); } };
+    gEl.addEventListener('input', function () { clear(); });
+    nEl.addEventListener('input', function () { clear(); });
+    sEl.addEventListener('input', function () { clear(); });
+    gEl.addEventListener('keydown', function (e) { if (e.key === 'Enter') { e.preventDefault(); nEl.focus(); } });
+    nEl.addEventListener('keydown', function (e) { if (e.key === 'Enter') { e.preventDefault(); sEl.focus(); } });
+    sEl.addEventListener('keydown', function (e) { if (e.key === 'Enter') { e.preventDefault(); submit(); } });
+    b.addEventListener('click', submit);
+    if (c) { c.addEventListener('click', function () { api.close(); }); }
+  }
+
+  function fill() {
+    var gEl = $('grecGrade'), nEl = $('grecNum'), sEl = $('grecName');
+    if (!gEl) { return; }
+    if (!gEl.value) { gEl.value = mem.g; }
+    if (!nEl.value) { nEl.value = mem.n; }
+    if (!sEl.value) { sEl.value = mem.s; }
+  }
+
+  var api = {
+    /* opts: {id, title, slot:'elementId'|null, modal:true|false, result:function()} */
+    setup: function (opts) {
+      cfg = opts || {};
+      modal = !!cfg.modal;
+      if (modal) {
+        try {
+          var host = document.createElement('div');
+          host.innerHTML = MASK;
+          while (host.firstChild) { document.body.appendChild(host.firstChild); }
+          var box = $('grec');
+          box.hidden = false;
+        } catch (e) {}
+      } else if (cfg.slot) {
+        var slot = $(cfg.slot);
+        if (slot) { slot.innerHTML = PANEL; }
+      }
+      wire();
+      fill();
+    },
+    show: function () {
+      var box = $('grec');
+      if (!box) { return; }
+      refresh();
+      box.hidden = false;
+    },
+    hide: function () {
+      var box = $('grec');
+      if (!box) { return; }
+      if (modal) { api.close(); return; }
+      box.hidden = true;
+    },
+    open: function (title, sum) {
+      var mask = $('grecMask');
+      if (!mask) { return; }
+      var t = $('grecTtl');
+      if (t && title) { t.textContent = title; }
+      refresh();
+      if (sum) { $('grecSum').textContent = sum; }
+      refresh();
+      mask.hidden = false;
+    },
+    close: function () {
+      var mask = $('grecMask');
+      if (mask) { mask.hidden = true; }
+    },
+    /* 새 판 시작: 등록 상태를 처음으로 되돌린다(적어 둔 학년·번호는 이 화면 안에서만 기억) */
+    reset: function () {
+      sent = false; busy = false;
+      var b = btn();
+      if (b) { b.disabled = false; b.textContent = '등록'; }
+      say('');
+      var box = $('grec');
+      if (box && !modal) { box.hidden = true; }
+      if (modal) { api.close(); }
+      fill();
+    },
+    isSent: function () { return sent; }
+  };
+
+  return api;
+})();
+/* ==== /RECORD PANEL ==== */
 (function () {
   'use strict';
   var DATA = {"version":2,"total":840,"levels":[{"id":1,"name":"워밍업","short":"워밍업","time":90,"hint":"더하기·빼기로 만들어 봐!","ops":["+","-"],"problems":[[12,9,5,8],[6,13,2,21],[5,1,5,11],[9,4,11,24],[5,10,3,12],[13,15,2,26],[11,9,10,12],[12,1,12,25],[11,7,6,24],[9,3,8,4],[13,4,6,23],[14,10,13,17],[10,2,9,3],[15,1,14,30],[7,5,4,8],[9,8,5,6],[4,9,10,3],[9,13,1,23],[8,10,6,24],[4,2,10,16],[15,3,4,22],[4,15,12,7],[12,7,1,18],[3,2,1,4],[7,15,12,10],[13,4,8,17],[13,9,3,25],[10,5,2,17],[4,15,9,28],[3,13,2,14],[7,6,2,11],[15,3,6,6],[11,6,14,3],[9,11,1,19],[11,3,5,3],[15,12,8,19],[15,6,13,22],[11,14,7,18],[5,2,4,11],[11,4,5,12],[2,4,2,8],[6,8,10,4],[12,8,13,7],[5,4,14,15],[14,2,12,4],[11,4,8,7],[3,6,7,16],[8,2,12,22],[9,4,8,13],[7,5,14,26],[10,7,1,4],[3,11,7,21],[12,4,14,30],[2,3,11,16],[10,14,5,19],[15,3,14,4],[12,8,4,8],[12,5,11,6],[14,7,12,9],[5,6,6,17],[5,11,5,21],[4,9,2,15],[1,10,10,21],[12,8,3,17],[13,3,12,28],[11,15,2,28],[12,8,11,9],[15,11,1,27],[7,3,8,2],[12,2,1,13],[4,3,4,5],[15,6,5,4],[11,9,14,6],[15,4,15,26],[10,11,3,24],[14,13,14,15],[13,6,14,21],[4,13,10,27],[8,5,1,12],[10,2,3,9],[12,9,4,7],[14,11,2,23],[11,1,8,20],[7,3,11,21],[15,6,8,13],[7,8,5,20],[14,4,3,13],[4,9,15,28],[5,11,14,2],[6,12,1,17],[11,5,4,2],[14,13,9,10],[14,2,10,22],[10,5,15,20],[13,1,7,5],[10,3,2,9],[7,3,9,13],[10,2,7,1],[11,6,1,4],[14,12,13,15],[9,2,13,20],[15,8,10,17],[6,5,3,4],[13,5,6,2],[15,1,12,26],[5,4,1,2],[10,1,7,16],[8,5,4,7],[15,10,14,19],[11,10,3,4],[8,5,15,18],[11,7,4,8],[10,1,15,24],[10,4,2,4],[11,6,2,3],[12,6,3,3],[15,6,4,5],[15,5,4,6],[15,10,2,3],[13,3,7,3],[12,4,3,5],[12,4,1,7],[8,2,3,3],[14,1,6,7],[14,2,11,1],[15,7,6,2],[14,10,1,3],[12,9,2,1],[10,1,3,6],[15,5,2,8],[15,4,5,6],[12,8,1,3],[11,4,1,6],[15,6,3,6],[12,1,4,7],[14,8,2,4],[15,2,8,5],[13,1,5,7],[9,2,3,4],[15,11,1,3]]},{"id":2,"name":"곱셈 탄탄","short":"곱셈","time":90,"hint":"곱셈이 들어간 식을 만들어 봐!","ops":["+","-","×"],"problems":[[6,8,8,40],[5,2,9,23],[5,6,9,39],[5,4,10,30],[4,9,7,43],[4,12,6,54],[3,3,2,18],[12,2,10,32],[4,2,12,28],[7,10,2,27],[4,12,2,50],[8,3,6,30],[8,8,10,54],[2,8,5,21],[3,12,10,46],[2,11,8,30],[4,6,5,34],[2,10,12,8],[12,4,4,52],[6,4,2,22],[5,8,10,30],[4,5,3,60],[9,3,4,21],[6,8,4,44],[5,8,2,38],[6,4,2,48],[5,3,11,38],[12,2,2,48],[8,6,4,52],[12,3,4,32],[5,8,7,47],[11,5,7,46],[11,4,8,36],[8,6,5,38],[4,9,5,31],[6,4,3,27],[5,3,7,8],[8,7,8,48],[11,3,12,21],[3,2,5,13],[8,3,2,14],[7,4,2,26],[5,6,2,32],[8,4,11,52],[11,3,5,26],[4,7,2,18],[6,4,6,30],[10,5,8,50],[4,4,10,6],[5,8,12,28],[7,5,10,25],[5,2,3,30],[3,7,10,11],[10,3,7,31],[3,5,7,22],[5,6,11,41],[11,6,10,56],[2,7,6,44],[7,5,2,17],[12,3,3,39],[3,6,6,39],[2,8,3,48],[10,3,11,43],[12,3,10,42],[7,3,2,23],[7,6,9,51],[9,4,8,41],[12,4,5,53],[2,10,10,30],[6,5,8,22],[2,7,8,22],[3,6,7,25],[8,3,7,17],[4,7,8,60],[5,4,5,15],[3,12,4,32],[4,11,11,55],[2,3,4,24],[5,2,2,20],[11,3,2,35],[4,8,8,40],[4,12,9,57],[10,2,6,22],[8,9,5,53],[4,6,3,22],[9,5,9,54],[3,4,11,23],[12,5,5,37],[2,4,3,24],[5,3,9,24],[10,6,4,56],[12,4,5,43],[9,2,2,36],[8,3,12,36],[2,4,4,18],[5,4,3,17],[9,10,2,29],[8,4,9,44],[11,4,12,32],[9,2,10,29],[9,6,2,21],[7,2,2,11],[4,8,5,37],[2,9,3,54],[3,2,3,18],[5,2,7,17],[2,12,9,33],[7,2,7,7],[7,9,12,51],[3,5,6,33],[3,9,4,39],[5,3,3,18],[3,5,6,21],[2,7,11,25],[2,3,10,32],[12,3,6,30],[6,3,2,12],[11,3,8,41],[3,10,2,60],[5,2,5,5],[6,3,12,42],[8,6,6,42],[8,3,7,29],[12,4,12,60],[8,7,4,52],[6,3,11,39],[5,5,11,14],[11,4,10,54],[9,4,9,45],[10,2,10,30],[5,11,2,27],[12,4,7,40],[6,3,6,24],[7,6,8,34],[5,4,5,25],[6,8,8,56],[3,7,6,45],[3,11,6,39],[6,5,9,21],[10,5,2,52]]},{"id":3,"name":"나눗셈 출동!","short":"나눗셈","time":85,"hint":"나눗셈도 함께! 딱 떨어지는 수로!","ops":["+","-","×","÷"],"problems":[[12,10,10,12],[6,7,3,14],[10,2,2,10],[3,7,7,3],[6,6,3,8],[10,12,6,20],[4,11,4,11],[9,7,3,21],[11,12,6,9],[8,4,2,6],[6,2,8,24],[2,12,4,6],[6,3,4,6],[12,4,6,18],[9,12,4,6],[11,7,7,11],[6,4,6,4],[10,6,3,12],[9,3,7,21],[9,11,11,9],[3,6,3,1],[3,6,2,9],[5,12,3,20],[7,6,3,14],[10,12,2,16],[4,4,8,2],[9,8,8,9],[12,4,12,4],[12,12,8,18],[11,6,11,6],[8,2,8,32],[12,4,9,27],[9,6,2,27],[6,8,2,24],[9,6,3,11],[10,5,12,24],[2,8,4,4],[7,4,2,5],[9,10,5,18],[10,10,4,25],[12,10,12,10],[6,10,3,20],[12,6,10,20],[11,8,2,7],[8,4,5,10],[12,2,10,60],[8,6,8,6],[3,7,3,7],[8,10,2,13],[10,6,10,6],[10,2,4,1],[12,6,9,18],[12,6,6,12],[12,10,5,10],[4,4,2,6],[7,12,4,21],[3,8,2,7],[12,7,4,21],[4,3,3,4],[9,10,3,30],[9,8,2,5],[4,10,2,20],[7,12,6,14],[9,3,3,9],[11,10,2,16],[4,5,10,2],[10,12,4,13],[12,2,6,36],[3,11,11,3],[10,8,2,40],[4,12,8,6],[11,6,3,13],[10,3,3,10],[12,3,7,28],[10,5,10,5],[12,3,2,2],[3,4,2,1],[6,3,6,3],[9,7,9,7],[11,10,11,10],[11,6,3,9],[2,12,4,5],[12,3,8,32],[3,8,4,1],[5,7,7,5],[6,3,9,11],[5,9,3,8],[8,12,3,12],[4,3,2,6],[12,2,6,4],[12,3,10,14],[5,8,5,8],[11,4,11,4],[8,3,8,3],[2,12,3,6],[12,12,4,36],[10,5,3,6],[9,10,10,9],[9,4,2,18],[8,4,3,5],[4,7,2,14],[4,2,2,4],[12,3,11,44],[12,11,11,12],[9,12,6,11],[9,12,2,54],[12,4,6,8],[11,4,4,11],[2,10,10,2],[12,12,6,14],[10,5,9,11],[8,4,4,8],[10,5,5,10],[9,3,3,6],[11,7,11,7],[9,6,2,6],[12,6,5,10],[6,12,12,6],[7,12,2,1],[2,9,3,5],[2,6,3,4],[9,8,2,36],[7,11,11,7],[8,4,8,16],[6,3,3,6],[6,8,4,12],[4,6,8,3],[7,8,2,28],[8,10,10,8],[11,3,3,11],[10,2,10,50],[8,4,10,12],[3,10,5,5],[8,4,11,13],[8,7,8,7],[6,2,4,3],[9,4,2,11],[12,4,5,15],[10,8,8,10],[12,7,12,7]]},{"id":4,"name":"혼합계산 고수","short":"혼합","time":80,"hint":"곱셈·나눗셈을 먼저 계산해!","ops":["+","-","×","÷"],"problems":[[36,32,2,52],[6,15,3,11],[28,8,4,30],[24,8,4,22],[21,27,3,30],[14,16,2,6],[2,18,2,11],[15,20,5,11],[34,22,2,45],[18,36,2,36],[20,20,10,18],[34,8,2,30],[15,30,15,13],[32,24,2,44],[28,36,2,46],[20,36,4,11],[24,16,4,20],[36,18,9,38],[20,22,2,9],[34,16,2,42],[20,14,2,27],[12,34,2,29],[9,18,9,11],[4,28,2,18],[36,24,2,48],[9,21,3,2],[3,24,3,11],[25,25,5,30],[10,30,5,16],[18,18,9,20],[26,8,2,22],[36,8,2,40],[12,20,4,7],[26,36,2,44],[2,32,2,18],[20,35,5,27],[24,16,2,16],[9,36,9,13],[22,33,11,25],[34,30,2,19],[24,34,2,41],[12,24,3,4],[28,8,2,32],[24,10,2,29],[30,24,2,18],[28,14,2,21],[30,27,3,21],[36,27,9,33],[18,6,2,15],[14,22,2,25],[8,8,4,10],[30,12,2,24],[12,8,4,10],[18,14,2,25],[24,10,2,19],[32,22,2,21],[36,32,4,44],[26,26,2,39],[10,35,5,3],[5,20,5,1],[2,4,2,4],[8,12,2,14],[24,24,2,12],[8,20,4,3],[16,16,2,24],[30,8,2,34],[8,18,2,17],[24,30,2,9],[18,4,2,16],[36,30,2,51],[22,5,15,97],[29,18,4,101],[21,14,5,91],[3,3,2,9],[10,9,7,73],[27,36,9,31],[30,12,6,32],[18,2,28,74],[35,3,28,119],[28,8,2,24],[32,5,4,52],[30,6,12,102],[20,6,16,116],[32,7,12,116],[9,2,23,55],[22,20,2,62],[3,3,8,27],[25,26,2,77],[8,5,14,78],[22,4,12,70],[16,9,2,34],[30,4,22,118],[19,8,7,75],[27,3,18,81],[32,8,2,36],[14,5,8,54],[12,4,18,84],[3,32,3,99],[32,4,7,4],[26,32,2,90],[3,10,9,93],[5,5,3,20],[18,17,5,103],[28,14,7,26],[32,2,5,42],[15,24,3,87],[33,9,9,114],[21,2,15,51],[9,4,2,17],[11,23,2,57],[12,4,4,28],[28,6,5,58],[16,12,2,40],[4,4,12,52],[8,16,6,104],[32,13,2,58],[24,2,9,6],[28,22,2,72],[29,2,7,43],[17,4,24,113],[10,2,4,18],[35,2,14,7],[15,2,3,9],[16,2,4,8],[4,2,28,60],[2,5,3,17],[8,16,7,120],[22,21,4,106],[32,35,2,102],[29,2,3,35],[16,5,3,31],[22,2,28,78],[26,2,36,98],[4,25,4,104],[19,3,33,118],[14,2,32,78],[18,20,4,98],[24,30,3,114],[24,3,19,81],[5,16,4,69]]},{"id":5,"name":"빈칸 3개 도전","short":"도전","time":75,"hint":"빈칸이 세 개! 침착하게!","ops":["+","-","×","÷"],"problems":[[14,8,2,13,23],[15,12,12,2,87],[4,6,2,5,60],[8,4,12,4,96],[5,6,5,3,18],[12,7,3,4,32],[12,10,7,2,47],[12,12,9,2,14],[7,3,4,14,6],[14,7,15,3,90],[6,3,3,9,54],[7,15,12,4,19],[14,4,8,6,42],[11,7,8,2,39],[12,5,15,6,10],[12,3,6,10,34],[9,10,3,3,90],[4,12,10,5,46],[14,12,14,6,2],[7,3,10,3,70],[14,8,4,2,4],[10,5,8,5,80],[9,15,2,10,12],[11,9,3,15,23],[4,7,2,9,5],[6,2,10,4,43],[14,5,8,2,15],[12,10,6,1,21],[9,3,10,6,45],[11,3,10,10,33],[14,8,14,7,56],[6,12,6,4,8],[14,7,8,1,11],[6,12,15,6,36],[12,3,9,3,7],[6,10,15,2,6],[15,5,7,3,24],[12,6,6,1,11],[14,6,14,9,15],[11,3,3,14,25],[4,13,2,13,2],[10,2,15,5,5],[14,3,14,13,39],[8,2,4,5,3],[4,15,4,9,6],[3,10,3,5,2],[12,11,3,10,34],[2,10,10,5,40],[9,9,4,2,20],[9,9,5,5,81],[11,10,10,5,108],[10,12,6,9,2],[3,8,6,2,8],[15,14,3,3,67],[8,7,14,3,1],[8,6,8,2,4],[6,3,13,3,18],[8,9,6,4,108],[14,7,11,3,25],[7,4,14,12,24],[6,6,2,15,18],[14,11,2,14,22],[6,3,8,4,36],[12,4,12,1,16],[13,8,6,3,19],[12,8,11,11,96],[13,15,6,3,43],[14,15,10,3,63],[14,12,3,2,112],[11,9,11,5,45],[9,8,3,7,17],[2,10,11,5,44],[6,8,6,5,3],[9,7,3,4,25],[6,6,12,6,18],[14,2,12,7,91],[14,2,10,6,11],[12,13,13,3,15],[13,15,2,15,26],[6,11,3,9,22],[15,9,9,5,10],[12,3,8,7,25],[10,11,4,11,14],[8,3,12,3,6],[15,5,6,3,6],[4,6,4,6,16],[13,8,4,6,9],[3,4,6,3,14],[15,3,9,7,68],[15,3,4,2,3],[11,9,15,5,5],[6,3,9,9,18],[10,12,3,2,42],[11,3,8,2,18],[12,8,9,12,72],[2,4,4,4,6],[9,10,12,6,21],[14,7,12,6,96],[2,6,6,4,8],[15,13,5,2,41],[14,12,3,1,11],[8,15,4,15,45],[3,13,2,2,16],[10,6,2,5,25],[10,9,2,12,15],[15,10,15,5,50],[6,4,4,4,24],[5,11,12,6,18],[4,11,10,10,15],[8,5,14,7,80],[12,6,8,3,27],[7,8,8,15,105],[3,4,6,12,6],[3,11,12,3,37],[10,11,14,14,110],[9,5,15,7,10],[12,14,4,6,7],[7,15,3,6,37],[9,15,3,7,38],[15,3,15,3,10],[15,5,12,3,24],[12,2,10,13,29],[7,6,2,1,20],[5,11,12,6,27],[7,12,9,3,22],[2,14,7,5,9],[15,10,8,8,25],[12,4,10,6,63],[3,8,3,2,6],[9,15,3,14,31],[8,2,2,5,3],[15,5,12,11,47],[9,12,6,11,22],[10,11,12,2,15],[4,14,14,3,7],[12,4,15,8,26],[8,12,4,7,17],[8,5,10,13,52],[10,9,3,1,29],[3,13,3,12,1]]},{"id":6,"name":"왕전초 연산왕","short":"왕","time":70,"hint":"진짜 연산왕의 문제야!","ops":["+","-","×","÷"],"problems":[[6,4,16,8,26],[19,11,24,3,107],[18,20,14,2,31],[16,2,18,3,12],[24,4,22,6,138],[8,3,15,3,23],[19,4,18,9,27],[20,4,14,7,12],[6,9,3,19,63],[16,24,20,4,35],[15,9,17,3,66],[21,7,14,2,70],[7,16,16,2,120],[24,24,2,12,24],[22,2,21,5,116],[15,13,4,2,4],[16,16,3,4,4],[18,2,5,12,69],[24,20,6,4,54],[24,18,6,3,18],[18,10,2,8,58],[20,12,24,4,26],[18,9,10,15,12],[14,11,16,2,146],[15,20,18,5,87],[14,9,16,2,118],[4,21,12,6,86],[13,6,12,2,49],[15,10,5,12,1],[18,6,18,3,9],[6,9,24,3,62],[14,20,24,4,134],[16,3,6,3,10],[4,2,20,3,62],[18,16,7,14,26],[23,4,16,8,31],[18,9,5,8,42],[24,12,20,8,162],[24,4,11,11,127],[24,6,24,4,100],[16,8,7,9,65],[15,2,21,3,1],[22,16,12,24,30],[12,15,4,2,182],[13,11,16,4,28],[10,22,2,15,175],[22,7,6,2,43],[12,15,18,2,147],[16,2,19,7,141],[12,2,24,2,2],[7,9,24,4,22],[8,12,5,2,38],[4,9,10,2,41],[15,16,18,6,63],[24,20,2,12,2],[20,12,4,4,21],[8,3,12,3,20],[17,19,8,4,34],[21,24,20,4,141],[20,16,9,3,68],[16,4,12,6,8],[22,11,18,3,88],[10,20,9,2,100],[22,10,2,2,25],[24,10,6,3,44],[8,18,24,16,35],[20,15,21,5,83],[24,4,10,5,22],[10,10,5,16,24],[10,18,2,4,19],[10,18,12,2,186],[5,2,4,2,9],[12,24,4,12,84],[24,12,6,9,13],[21,7,3,19,60],[21,24,8,3,85],[12,16,18,2,19],[20,14,9,18,13],[14,21,3,21,17],[14,16,24,3,142],[24,24,2,11,47],[3,7,12,6,17],[10,15,20,5,29],[18,9,8,24,15],[22,4,6,2,91],[7,17,22,2,35],[16,4,12,15,184],[12,20,12,4,29],[8,11,12,2,74],[15,20,10,5,37],[2,20,2,5,52],[16,4,9,4,25],[17,13,24,8,56],[15,21,2,6,8],[15,3,12,3,14],[16,4,5,24,124],[11,17,20,2,38],[20,14,20,2,44],[18,22,2,17,24],[2,6,16,4,4],[15,8,24,6,116],[14,11,6,2,151],[20,5,11,16,180],[4,23,8,2,96],[10,5,3,14,44],[6,12,3,4,22],[12,6,2,21,44],[20,6,15,5,117],[4,4,15,6,14],[21,12,12,3,69],[24,24,4,18,12],[24,3,21,9,31],[20,2,20,5,12],[17,12,16,4,65],[2,20,2,17,172],[24,4,18,2,87],[3,14,16,2,50],[20,10,6,15,16],[12,24,6,24,32],[15,18,7,3,57],[24,4,2,6,32],[18,3,21,7,24],[21,21,3,14,14],[3,15,4,3,23],[20,10,20,4,195],[18,6,4,12,51],[14,6,24,3,62],[4,7,9,3,25],[18,6,21,5,108],[21,15,3,11,76],[13,21,20,2,24],[12,3,24,8,3],[15,24,2,6,23],[3,16,6,3,35],[10,2,21,8,173],[3,18,3,21,129],[24,4,12,16,21],[6,15,9,3,18],[16,6,15,3,101],[16,12,10,2,76]]}]};
@@ -685,6 +971,7 @@ button{font-family:inherit;cursor:pointer}
 
   function startRound(levelId) {
     stopTimer();
+    GameRec.reset();
     S.round++;
     S.level = levelId;
     S.idx = 0; S.correct = 0; S.score = 0; S.streak = 0; S.bestStreak = 0;
@@ -890,6 +1177,7 @@ button{font-family:inherit;cursor:pointer}
   function renderResult(stars) {
     $('playView').hidden = true;
     $('resultView').hidden = false;
+    GameRec.show();
     var titles = ['다시 도전해 볼까요?', '조금만 더 힘내요!', '좋아요! 잘하고 있어요', '정말 잘했어요!', '완벽해요!'];
     $('resultTitle').textContent = S.reason === 'time' && S.correct < 5 ? '시간이 다 됐어요!' : titles[Math.min(S.correct, 4)];
     $('resultSub').textContent = DATA.levels[S.level - 1].name + ' · ' + (S.reason === 'time' ? '시간 종료' : '5문제 완주');
@@ -1096,6 +1384,15 @@ button{font-family:inherit;cursor:pointer}
   }
 
   function init() {
+    GameRec.setup({
+      id: 'math', title: '♡왕전초 연산왕!♡', slot: 'recSlot',
+      result: function () {
+        var lv = DATA.levels[S.level - 1] || { name: '' };
+        return { score: S.score,
+                 detail: S.level + '단계 ' + lv.name + ' · 맞힌 ' + S.correct + '/5',
+                 durationSec: S.elapsed };
+      }
+    });
     var stored = readStore();
     save.best = stored.best || {};
     save.muted = !!stored.muted;
